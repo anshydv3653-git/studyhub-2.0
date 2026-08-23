@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyHub — Class 10 Notes, PYQs & Practice | Learn Smarter. Score Higher.</title>
+<meta name="theme-color" content="#e11d48">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="%23e11d48"/><path d="M20 46V22l12-6 12 6v24" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 30l12 6 12-6" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/></svg>'>
+<style>
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:400 800;font-display:swap;src:local('Plus Jakarta Sans'),local('PlusJakartaSans');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--rose-50:#fdf2f4;--rose-100:#fce7ec;--rose-200:#f9c6d3;--rose-300:#f49db3;--rose-400:#ee5d80;--rose-500:#e11d48;--rose-600:#d11d45;--rose-700:#b8123a;--rose-800:#93102f;--rose-900:#7a0d28;--ink:#251b27;--ink-2:#4d4250;--muted:#7c6e7d;--bg:#fffdfe;--card:#ffffff;--line:rgba(225,29,72,.10);--shadow-sm:0 4px 16px -8px rgba(36,26,38,.12);--shadow-md:0 18px 44px -20px rgba(184,18,58,.25);--shadow-lg:0 34px 70px -30px rgba(184,18,58,.35);--grad-rose:linear-gradient(135deg,#f43f5e 0%,#e11d48 48%,#be123c 100%);--grad-rose-soft:linear-gradient(150deg,#fdf2f4 0%,#fff 55%,#fce7ec 100%);--r-lg:26px;--r-md:18px;--r-sm:14px;--font:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1);--nav-h:70px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}
+::selection{background:#fecdd3;color:#881337}
+::-webkit-scrollbar{width:11px}
+::-webkit-scrollbar-track{background:#fdf2f4}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ee5d80,#be123c);border-radius:20px;border:3px solid #fdf2f4}
+.container{width:min(1200px,92%);margin-inline:auto;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-700);background:var(--rose-50);border:1px solid var(--line);padding:8px 16px;border-radius:999px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--grad-rose);box-shadow:0 0 0 4px rgba(225,29,72,.12)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:1rem;border-radius:999px;padding:15px 30px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s,filter .25s;position:relative;white-space:nowrap}
+.btn svg{transition:transform .3s var(--ease);flex:none}
+.btn-primary{background:var(--grad-rose);color:#fff;box-shadow:0 14px 34px -12px rgba(184,18,58,.55)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 44px -14px rgba(184,18,58,.6);filter:saturate(1.08)}
+.btn-primary:hover svg{transform:translateX(4px)}
+.btn-glass{background:rgba(255,255,255,.72);border:1px solid var(--line);color:var(--ink);box-shadow:var(--shadow-sm);backdrop-filter:blur(10px)}
+.btn-glass:hover{transform:translateY(-3px);border-color:rgba(225,29,72,.35);background:#fff;box-shadow:var(--shadow-md)}
+.btn-sm{padding:11px 22px;font-size:.92rem}
+
+/* NAV */
+.nav{position:fixed;inset:0 auto 0;z-index:100;height:var(--nav-h);transition:background .35s,box-shadow .35s,border-color .35s;border-bottom:1px solid transparent}
+.nav-inner{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav.scrolled{background:rgba(255,254,253,.82);backdrop-filter:blur(16px);border-bottom-color:var(--line);box-shadow:0 10px 30px -18px rgba(36,26,38,.18)}
+.brand{display:inline-flex;align-items:center;gap:11px;font-weight:800;font-size:1.22rem;letter-spacing:-.02em;cursor:pointer}
+.brand-mark{width:42px;height:42px;border-radius:13px;background:var(--grad-rose);display:grid;place-items:center;box-shadow:0 10px 22px -8px rgba(184,18,58,.55);transition:transform .35s var(--ease)}
+.brand:hover .brand-mark{transform:rotate(-8deg) scale(1.06)}
+.brand em{font-style:normal;background:var(--grad-rose);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{font-weight:600;font-size:.95rem;color:var(--ink-2);padding:9px 15px;border-radius:999px;transition:color .25s,background .25s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--rose-700);background:var(--rose-50)}
+.nav-toggle{display:none;width:44px;height:44px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.7);place-items:center}
+@media(max-width:920px){.nav-links{position:fixed;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;gap:4px;background:rgba(255,254,253,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -24px rgba(36,26,38,.25);padding:14px 5vw 20px;transform:translateY(-8px);opacity:0;pointer-events:none;transition:transform .35s var(--ease),opacity .3s}.nav-links.open{transform:none;opacity:1;pointer-events:auto}.nav-links a{padding:13px 16px;border-radius:14px}.nav-toggle{display:grid}}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:150;background:var(--grad-rose);border-radius:0 3px 3px 0}
+
+/* PAGE SYSTEM */
+.page{display:none;padding-top:calc(var(--nav-h) + 20px);min-height:80vh;animation:pageIn .4s var(--ease)}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* SECTION HEAD */
+.section-head{max-width:640px;margin-bottom:clamp(34px,5vw,56px)}
+.section-head h2{font-size:clamp(28px,4.2vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin:18px 0 14px}
+.section-head p{color:var(--muted);font-size:clamp(15px,1.4vw,17.5px)}
+.section-head.center{margin-inline:auto;text-align:center}
+
+/* BREADCRUMBS */
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.85rem;font-weight:700;color:var(--muted);margin-bottom:14px}
+.crumbs .sep{color:var(--rose-400)}
+.crumbs .cur{color:var(--rose-700);background:var(--rose-50);padding:4px 12px;border-radius:999px}
+.crumbs a{cursor:pointer;transition:color .2s}
+.crumbs a:hover{color:var(--rose-600)}
+
+/* CLASS GRID */
+.class-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;padding-bottom:80px}
+.tilt{position:relative;transform:perspective(950px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0));transition:transform .28s var(--ease),box-shadow .3s var(--ease),border-color .3s;will-change:transform}
+.tilt::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;background:radial-gradient(620px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.65),transparent 42%);transition:opacity .3s}
+.tilt:hover::after{opacity:1}
+.class-card{--ty:0px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 24px 24px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex;flex-direction:column;gap:14px;position:relative;cursor:pointer}
+.class-card:hover{--ty:-8px;box-shadow:var(--shadow-lg);border-color:rgba(225,29,72,.28)}
+.class-card .cc-num{width:62px;height:62px;border-radius:19px;display:grid;place-items:center;background:var(--cc-bg,var(--rose-50));color:var(--rose-700);font-weight:800;font-size:1.5rem;letter-spacing:-.02em;box-shadow:inset 0 0 0 1px rgba(225,29,72,.12);transition:transform .35s var(--ease),box-shadow .35s}
+.class-card:hover .cc-num{transform:translateY(-4px) rotate(-6deg) scale(1.05);box-shadow:0 16px 30px -14px rgba(184,18,58,.4)}
+.class-card h3{font-size:1.42rem;font-weight:800;letter-spacing:-.02em}
+.class-card .cc-sub{font-size:.83rem;color:var(--muted);font-weight:600;line-height:1.5;flex:1}
+.class-card .cc-meta{display:flex;align-items:center;justify-content:space-between;border-top:1px dashed rgba(225,29,72,.18);padding-top:14px}
+.class-card .cc-meta span{font-size:.78rem;font-weight:700;color:var(--rose-700)}
+.class-card .cc-go{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;color:var(--rose-700);background:var(--rose-50);transition:background .3s,color .3s,transform .3s var(--ease)}
+.class-card:hover .cc-go{background:var(--grad-rose);color:#fff;transform:translateX(4px)}
+.class-card .cc-go svg{width:17px;height:17px}
+
+/* SUBJECT GRID */
+.subject-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding-bottom:80px}
+.subject-card{--ty:0px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .28s var(--ease),box-shadow .3s,border-color .3s}
+.subject-card:hover{--ty:-8px;box-shadow:var(--shadow-lg);border-color:rgba(225,29,72,.28);transform:translateY(-8px)}
+.subject-card .sc-top{height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.subject-card .sc-top::after{content:"";position:absolute;top:-40%;right:-30%;width:80%;height:160%;transform:rotate(24deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent)}
+.subject-card .sc-icon{font-size:3rem;position:relative;z-index:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.15))}
+.subject-card .sc-body{padding:16px 18px}
+.subject-card h3{font-size:1.08rem;font-weight:800;letter-spacing:-.01em}
+.subject-card .sc-ch{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:4px}
+.subject-card .sc-arrow{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(225,29,72,.18)}
+.subject-card .sc-arrow span{font-size:.78rem;font-weight:700;color:var(--rose-700)}
+.subject-card .sc-arrow svg{width:16px;height:16px;color:var(--rose-700);transition:transform .3s var(--ease)}
+.subject-card:hover .sc-arrow svg{transform:translateX(4px)}
+
+/* CHAPTER LIST */
+.chapter-list-wrap{padding-bottom:80px}
+.chapter-item{--ty:0px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 20px;margin-bottom:12px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .28s var(--ease),box-shadow .3s,border-color .3s}
+.chapter-item:hover{--ty:-4px;box-shadow:var(--shadow-md);border-color:rgba(225,29,72,.25);transform:translateY(-4px)}
+.chapter-item .ci-num{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--rose-50);color:var(--rose-700);font-weight:800;font-size:1rem;flex:none;transition:transform .35s var(--ease),background .3s,color .3s}
+.chapter-item:hover .ci-num{background:var(--grad-rose);color:#fff;transform:translateY(-2px) rotate(-4deg)}
+.chapter-item .ci-name{flex:1;font-weight:700;font-size:1rem;letter-spacing:-.01em}
+.chapter-item .ci-go{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--rose-50);color:var(--rose-700);transition:background .3s,color .3s,transform .3s var(--ease)}
+.chapter-item:hover .ci-go{background:var(--grad-rose);color:#fff;transform:translateX(3px)}
+.chapter-item .ci-go svg{width:16px;height:16px}
+
+/* CHAPTER TABS */
+.ch-tabs{display:flex;overflow-x:auto;gap:6px;margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:0;-ms-overflow-style:none;scrollbar-width:none}
+.ch-tabs::-webkit-scrollbar{display:none}
+.ch-tab{display:flex;align-items:center;gap:8px;padding:12px 18px;font-size:.92rem;font-weight:700;color:var(--muted);border-bottom:2.5px solid transparent;transition:color .25s,border-color .25s;white-space:nowrap;cursor:pointer;background:none}
+.ch-tab:hover{color:var(--ink)}
+.ch-tab.active{color:var(--rose-700);border-bottom-color:var(--rose-500)}
+.ch-tab svg{width:18px;height:18px}
+
+/* TAB PANELS */
+.tab-panel{display:none;animation:pageIn .35s var(--ease)}
+.tab-panel.active{display:block}
+
+/* NOTES */
+.note-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.note-head{padding:18px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background .2s}
+.note-head:hover{background:var(--rose-50)}
+.note-head .nh-num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--rose-50);color:var(--rose-700);font-weight:800;font-size:.88rem;flex:none}
+.note-head .nh-title{flex:1;font-weight:700;font-size:.98rem}
+.note-head .nh-arrow{width:24px;height:24px;color:var(--muted);transition:transform .3s var(--ease);flex:none}
+.note-head.open .nh-arrow{transform:rotate(180deg)}
+.note-body{padding:0 20px 20px;display:none;border-top:1px solid var(--line)}
+.note-body.open{display:block}
+.note-body .note-content{margin-top:16px;color:var(--ink-2);font-size:.95rem;line-height:1.75}
+.note-body .note-content h1,.note-body .note-content h2,.note-body .note-content h3{color:var(--ink);font-weight:800;margin:20px 0 10px;letter-spacing:-.01em}
+.note-body .note-content h1{font-size:1.4rem}
+.note-body .note-content h2{font-size:1.2rem}
+.note-body .note-content h3{font-size:1.05rem}
+.note-body .note-content p{margin-bottom:12px}
+.note-body .note-content ul,.note-body .note-content ol{margin:10px 0 14px 24px}
+.note-body .note-content li{margin-bottom:6px}
+.note-body .note-content strong{color:var(--ink);font-weight:700}
+.note-body .note-content code{background:var(--rose-50);padding:2px 7px;border-radius:6px;font-size:.88em;color:var(--rose-800)}
+.note-body .note-content blockquote{border-left:3px solid var(--rose-400);padding:10px 16px;margin:14px 0;background:var(--rose-50);border-radius:0 10px 10px 0;font-style:italic}
+.note-diagrams{margin-top:20px}
+.note-diagrams h4{font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-700);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.note-diagrams h4::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--grad-rose);box-shadow:0 0 0 3px rgba(225,29,72,.12)}
+.diag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.diag-card{background:linear-gradient(150deg,#fdf2f4,#fce7ec);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.diag-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.diag-card svg{max-height:120px;margin:0 auto}
+.diag-card p{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:8px}
+.diag-card .anim-badge{display:inline-block;font-size:.65rem;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--grad-rose);padding:3px 8px;border-radius:999px;margin-top:4px}
+
+/* PRACTICE / QUIZ */
+.quiz-wrap{max-width:680px;margin:0 auto}
+.quiz-progress{margin-bottom:20px}
+.quiz-progress .qp-info{display:flex;justify-content:space-between;margin-bottom:8px;font-size:.85rem;font-weight:700}
+.quiz-progress .qp-info span:first-child{color:var(--muted)}
+.quiz-progress .qp-info span:last-child{color:var(--rose-700)}
+.quiz-progress .qp-bar{height:8px;background:#f7e2e8;border-radius:99px;overflow:hidden}
+.quiz-progress .qp-fill{height:100%;background:var(--grad-rose);border-radius:99px;transition:width .5s var(--ease)}
+.quiz-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 24px;box-shadow:var(--shadow-md);position:relative}
+.quiz-card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(500px 240px at 100% 0%,rgba(252,231,236,.7),transparent 60%)}
+.quiz-card .qq{font-size:clamp(17px,1.8vw,20px);font-weight:700;letter-spacing:-.015em;line-height:1.4;margin-bottom:20px;position:relative}
+.quiz-card .q-opts{display:grid;gap:11px;position:relative}
+.q-opt{display:flex;align-items:center;gap:14px;text-align:left;width:100%;border:1.5px solid var(--line);border-radius:var(--r-md);background:#fff;padding:14px 16px;font-size:.96rem;font-weight:600;color:var(--ink);position:relative;overflow:hidden;transition:border-color .25s,background .25s,transform .2s var(--ease),box-shadow .25s;cursor:pointer}
+.q-opt:hover:not(:disabled){border-color:rgba(225,29,72,.45);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.q-opt:disabled{cursor:default}
+.q-opt .ol{width:34px;height:34px;flex:none;border-radius:11px;display:grid;place-items:center;background:var(--rose-50);color:var(--rose-700);font-weight:800;font-size:.88rem;border:1px solid rgba(225,29,72,.16);transition:all .25s}
+.q-opt.sel{border-color:var(--rose-500);background:#fdf2f4}
+.q-opt.sel .ol{background:var(--grad-rose);color:#fff;border-color:transparent}
+.q-opt.ok{border-color:#16a34a;background:#f0faf3}
+.q-opt.ok .ol{background:#16a34a;color:#fff;border-color:transparent}
+.q-opt.bad{border-color:#dc2626;background:#fef2f2;opacity:.85}
+.q-opt.bad .ol{background:#dc2626;color:#fff;border-color:transparent}
+.quiz-fb{margin-top:16px;border-radius:var(--r-md);padding:14px 16px;font-size:.9rem;font-weight:600;line-height:1.5;display:none}
+.quiz-fb.show{display:block;animation:pageIn .4s var(--ease)}
+.quiz-fb.ok{border:1px solid rgba(22,163,74,.28);background:#f0faf3;color:#14532d}
+.quiz-fb.err{border:1px solid rgba(220,38,38,.28);background:#fef2f2;color:#7f1d1d}
+.quiz-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+
+/* QUIZ RESULT */
+.quiz-result{text-align:center;padding:40px 20px}
+.qr-ring{width:120px;height:120px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--rose-500) var(--pct,66%),#f7e2e8 0);position:relative}
+.qr-ring::before{content:"";position:absolute;inset:9px;border-radius:50%;background:#fff}
+.qr-ring b{position:relative;z-index:1;font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--rose-700)}
+
+/* PYQ / NCERT */
+.acc-item{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow-sm)}
+.acc-head{padding:16px 18px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;transition:background .2s}
+.acc-head:hover{background:var(--rose-50)}
+.acc-head .ah-tags{display:flex;gap:6px;flex:none;flex-wrap:wrap;margin-top:2px}
+.acc-head .ah-tag{font-size:.68rem;font-weight:800;padding:4px 10px;border-radius:999px}
+.acc-head .ah-tag.year{background:var(--rose-50);color:var(--rose-700);border:1px solid rgba(225,29,72,.16)}
+.acc-head .ah-tag.board{background:#f0faf3;color:#16a34a;border:1px solid rgba(22,163,74,.2)}
+.acc-head .ah-tag.sec{background:#f0f0ff;color:#6366f1;border:1px solid rgba(99,102,241,.2)}
+.acc-head .ah-tag.qnum{background:var(--rose-50);color:var(--rose-700);border:1px solid rgba(225,29,72,.16)}
+.acc-head .ah-q{flex:1;font-size:.92rem;font-weight:600;color:var(--ink);line-height:1.5}
+.acc-head .ah-arrow{width:20px;height:20px;color:var(--muted);transition:transform .3s var(--ease);flex:none;margin-top:2px}
+.acc-head.open .ah-arrow{transform:rotate(180deg)}
+.acc-body{padding:0 18px 18px;display:none;border-top:1px solid var(--line)}
+.acc-body.open{display:block}
+.acc-answer{margin-top:12px;padding:14px 16px;background:#f0faf3;border:1px solid rgba(22,163,74,.2);border-radius:12px;font-size:.9rem;color:#14532d;line-height:1.65}
+.acc-answer .label{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#16a34a;margin-bottom:6px;display:block}
+
+/* FILTERS */
+.filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;align-items:center}
+.filter-bar select{padding:9px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:.88rem;font-weight:600;color:var(--ink-2);outline:none;transition:border-color .25s;font-family:var(--font)}
+.filter-bar select:focus{border-color:rgba(225,29,72,.4)}
+.filter-bar .fcount{margin-left:auto;font-size:.85rem;color:var(--muted);font-weight:600}
+
+/* DIAGRAMS GALLERY */
+.diag-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.gallery-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.gallery-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.gallery-card .gc-art{aspect-ratio:4/3;background:linear-gradient(150deg,#fdf2f4,#fce7ec);padding:20px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.gallery-card .gc-art svg{max-width:100%;max-height:100%}
+.gallery-card .gc-body{padding:12px 16px}
+.gallery-card .gc-body h4{font-size:.92rem;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gallery-card .gc-body .anim-badge{display:inline-block;font-size:.65rem;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--grad-rose);padding:3px 8px;border-radius:999px;margin-top:4px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(37,27,39,.6);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.show{opacity:1;pointer-events:auto}
+.modal-box{background:#fff;border-radius:var(--r-lg);max-width:720px;width:100%;max-height:90vh;overflow:auto;box-shadow:var(--shadow-lg);position:relative;animation:pageIn .35s var(--ease)}
+.modal-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:2}
+.modal-head h3{font-size:1.05rem;font-weight:800;letter-spacing:-.01em}
+.modal-close{width:36px;height:36px;border-radius:12px;background:var(--rose-50);display:grid;place-items:center;transition:background .2s}
+.modal-close:hover{background:var(--rose-100)}
+.modal-close svg{width:18px;height:18px;color:var(--rose-700)}
+.modal-body{padding:24px;display:flex;align-items:center;justify-content:center;min-height:250px;background:linear-gradient(150deg,#fdf2f4,#fce7ec)}
+.modal-body svg{max-width:100%;height:auto}
+
+/* LOADING / EMPTY */
+.loading{text-align:center;padding:60px 20px}
+.loading .spinner{width:40px;height:40px;border:4px solid var(--rose-100);border-top-color:var(--rose-500);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+.loading p{color:var(--muted);font-size:.9rem;font-weight:600}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:60px 20px}
+.empty .em-icon{font-size:3rem;margin-bottom:12px}
+.empty p{color:var(--muted);font-size:.95rem}
+
+/* FOOTER */
+.footer{background:linear-gradient(180deg,#2a1d2b,#1a1119);color:#e9e2ea;margin-top:0;position:relative;overflow:hidden}
+.footer::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-rose)}
+.footer-bottom{padding:24px 0;text-align:center;font-size:.84rem;color:#b7a9ba;position:relative}
+.footer-bottom b{color:#f9c6d3;font-weight:700}
+.footer-bottom .heart{color:#f43f5e}
+
+/* RESPONSIVE */
+@media(max-width:1080px){.class-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.class-grid{grid-template-columns:1fr}.subject-grid{grid-template-columns:repeat(2,1fr)}.diag-gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.subject-grid{grid-template-columns:1fr}.diag-gallery{grid-template-columns:1fr}}
+
+/* SECTION PADDING */
+.section-pad{padding:clamp(30px,5vw,60px) 0}
+
+/* HERO MINI */
+.hero-mini{position:relative;padding:clamp(30px,5vw,50px) 0 clamp(20px,3vw,30px);overflow:hidden}
+.hero-mini::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(900px 480px at 88% -10%,rgba(252,231,236,.95),transparent 62%),radial-gradient(760px 460px at -8% 22%,rgba(252,231,236,.6),transparent 55%)}
+.hero-mini h1{font-size:clamp(32px,4.8vw,54px);font-weight:800;letter-spacing:-.035em;line-height:1.1;position:relative;z-index:1}
+.hero-mini h1 .hl{background:linear-gradient(120deg,#f43f5e,#be123c 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-mini p{color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin-top:12px;position:relative;z-index:1}
+
+/* ABOUT SECTION */
+.about-section{position:relative;padding:clamp(50px,7vw,80px) 0}
+.about-section::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 420px at 50% 110%,rgba(252,231,236,.8),transparent 65%)}
+.about-card{position:relative;max-width:620px;margin-inline:auto;text-align:center;background:rgba(255,255,255,.72);border:1px solid rgba(225,29,72,.16);border-radius:calc(var(--r-lg) + 8px);padding:clamp(34px,5vw,50px) clamp(22px,4vw,44px);backdrop-filter:blur(16px);box-shadow:var(--shadow-lg);overflow:hidden}
+.about-card::before{content:"";position:absolute;top:-70px;left:50%;transform:translateX(-50%);width:340px;height:190px;background:radial-gradient(50% 100% at 50% 100%,rgba(244,93,128,.28),transparent 70%);pointer-events:none}
+.about-avatar{position:relative;width:96px;height:96px;margin:0 auto 18px;border-radius:28px;background:var(--grad-rose);display:grid;place-items:center;color:#fff;font-weight:800;font-size:2.2rem;box-shadow:0 20px 44px -16px rgba(184,18,58,.55);transform:rotate(-4deg);transition:transform .4s var(--ease)}
+.about-card:hover .about-avatar{transform:rotate(0deg) scale(1.04)}
+.about-avatar::after{content:"";position:absolute;inset:-8px;border-radius:34px;border:2px dashed rgba(225,29,72,.3);animation:spin 26s linear infinite}
+.about-card h3{font-size:clamp(22px,2.8vw,28px);font-weight:800;letter-spacing:-.02em}
+.about-role{color:var(--rose-700);font-weight:700;margin:4px 0 16px;font-size:.95rem}
+.about-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:20px}
+.about-links a{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 18px;box-shadow:var(--shadow-sm);transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+.about-links a:hover{transform:translateY(-3px);border-color:rgba(225,29,72,.35);box-shadow:var(--shadow-md)}
+.about-links a svg{width:16px;height:16px;color:var(--rose-600)}
+.about-quote{font-size:clamp(14px,1.3vw,16px);color:var(--ink-2);max-width:44ch;margin:0 auto;line-height:1.65;font-weight:500}
+.about-quote::before{content:"\201C";display:block;font-size:2.4rem;line-height:.6;color:var(--rose-400);font-weight:800;margin-bottom:4px}
+.about-sign{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-size:.85rem;font-weight:800;color:var(--rose-700)}
+.about-sign::before{content:"";width:30px;height:1.5px;background:var(--grad-rose)}
+
+/* NOTICE BANNER */
+.notice-bar{position:relative;z-index:90;background:linear-gradient(135deg,#fdf2f4,#fce7ec);border-bottom:1px solid var(--line);overflow:hidden;transition:max-height .4s var(--ease),opacity .3s,padding .4s var(--ease);max-height:120px;opacity:1}
+.notice-bar.dismissed{max-height:0;opacity:0;padding:0;border:none;pointer-events:none}
+.notice-inner{display:flex;align-items:center;justify-content:center;gap:10px;padding:11px 50px 11px 16px;text-align:center;position:relative}
+.notice-icon{flex:none;width:28px;height:28px;border-radius:9px;background:var(--grad-rose);display:grid;place-items:center;color:#fff;font-size:.8rem;box-shadow:0 4px 12px -4px rgba(184,18,58,.4)}
+.notice-icon svg{width:15px;height:15px}
+.notice-text{font-size:.84rem;font-weight:600;color:var(--ink-2);line-height:1.5}
+.notice-text b{color:var(--rose-700);font-weight:800}
+.notice-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:var(--muted);transition:background .2s,color .2s;cursor:pointer;background:none;border:none}
+.notice-close:hover{background:rgba(225,29,72,.1);color:var(--rose-700)}
+.notice-close svg{width:14px;height:14px}
+
+/* COMING SOON */
+.coming-soon{position:relative;padding:0 0 clamp(50px,7vw,80px)}
+.cs-card{max-width:680px;margin-inline:auto;text-align:center;background:linear-gradient(160deg,#fff,#fdf2f4);border:1px solid rgba(225,29,72,.16);border-radius:var(--r-lg);padding:clamp(28px,4vw,40px) clamp(22px,4vw,36px);box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.cs-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-rose)}
+.cs-badge{display:inline-flex;align-items:center;gap:8px;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-700);background:var(--rose-50);border:1px solid var(--line);padding:7px 14px;border-radius:999px;margin-bottom:16px}
+.cs-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--grad-rose);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
+.cs-card h3{font-size:clamp(18px,2.2vw,24px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.cs-card p{color:var(--ink-2);font-size:clamp(14px,1.3vw,16px);line-height:1.7;max-width:52ch;margin:0 auto}
+.cs-classes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+.cs-classes span{font-size:.78rem;font-weight:700;color:var(--muted);background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:999px}
+.cs-classes span.coming{color:var(--rose-700);background:var(--rose-50)}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" onclick="navigate('home')"><span class="brand-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>Study<em>Hub</em></a>
+    <nav class="nav-links" id="navLinks">
+      <a onclick="navigate('home')" class="active">Home</a>
+      <a onclick="navigate('home')">Classes</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- NOTICE BANNER -->
+<div class="notice-bar" id="noticeBar">
+  <div class="container">
+    <div class="notice-inner">
+      <span class="notice-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg></span>
+      <span class="notice-text">A few Class 10 topics are still being prepared — please don't worry about it. <b>Everything will be fully available within the next 24–48 hours.</b> Until then, keep studying and stay focused. You've got this! 📚</span>
+      <button class="notice-close" onclick="dismissNotice()" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="page active">
+  <div class="container">
+    <div class="hero-mini">
+      <h1>Learn Smarter.<br>Understand Better. <span class="hl">Score Higher.</span></h1>
+      <p>Complete Class 10 study companion — Notes, Diagrams, Practice, PYQs and NCERT solutions, all in one place.</p>
+    </div>
+    <div class="section-head center" style="margin-top:40px">
+      <span class="eyebrow">Class 10</span>
+      <h2>Choose a subject</h2>
+      <p>Tap any subject to explore chapter-wise notes, practice questions, previous year papers and more.</p>
+    </div>
+    <div class="subject-grid" id="homeSubjects">
+      <div class="loading"><div class="spinner"></div><p>Loading subjects...</p></div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+      <div class="about-card">
+        <span class="eyebrow" style="margin-bottom:18px">About the developer</span>
+        <div class="about-avatar">A</div>
+        <h3>Ansh Yadav</h3>
+        <p class="about-role">Founder & Developer</p>
+        <div class="about-links">
+          <a href="https://instagram.com/build_with_ansh" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+            @build_with_ansh
+          </a>
+          <a href="mailto:sparkai.automation@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            sparkai.automation@gmail.com
+          </a>
+        </div>
+        <p class="about-quote">Building technology to make learning simpler, smarter and accessible for every student.</p>
+        <span class="about-sign">— Ansh</span>
+      </div>
+    </section>
+
+    <!-- COMING SOON -->
+    <section class="coming-soon">
+      <div class="cs-card">
+        <span class="cs-badge">Coming Soon</span>
+        <h3>Class 9, 11 & 12 Material is on its way</h3>
+        <p>I'm currently a Class 10 student myself, and with board exams around the corner, my full focus is on making the Class 10 content as thorough and helpful as possible. Once boards are done, I'll be working on adding complete study material for Class 9, 11 and 12 — same quality, same care. Thank you for your patience and support. It truly means a lot. 🙏</p>
+        <div class="cs-classes">
+          <span class="coming">Class 9 — Coming Soon</span>
+          <span style="color:var(--rose-700);background:var(--grad-rose);color:#fff;border-color:transparent">Class 10 — Live Now ✅</span>
+          <span class="coming">Class 11 — Coming Soon</span>
+          <span class="coming">Class 12 — Coming Soon</span>
+        </div>
+        <p style="margin-top:16px;font-size:.85rem;color:var(--muted)">If you have any issues with the study material, need something specific, or just want to say hi — feel free to DM on Instagram or send an email. I read every message.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ============ SUBJECT PAGE ============ -->
+<div id="page-subjects" class="page">
+  <div class="container section-pad">
+    <div class="crumbs" id="subjectCrumbs"></div>
+    <h1 id="subjectTitle" style="font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.03em;margin-bottom:28px"></h1>
+    <div class="subject-grid" id="subjectGrid">
+      <div class="loading"><div class="spinner"></div><p>Loading subjects...</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHAPTERS PAGE ============ -->
+<div id="page-chapters" class="page">
+  <div class="container section-pad">
+    <div class="crumbs" id="chapterCrumbs"></div>
+    <h1 id="chapterTitle" style="font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.03em;margin-bottom:28px"></h1>
+    <div class="chapter-list-wrap" id="chapterList">
+      <div class="loading"><div class="spinner"></div><p>Loading chapters...</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER DETAIL PAGE ============ -->
+<div id="page-detail" class="page">
+  <div class="container section-pad">
+    <div class="crumbs" id="detailCrumbs"></div>
+    <h1 id="detailTitle" style="font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:20px"></h1>
+    
+    <!-- Tabs -->
+    <div class="ch-tabs" id="detailTabs">
+      <button class="ch-tab active" data-tab="notes" onclick="switchTab('notes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</button>
+      <button class="ch-tab" data-tab="practice" onclick="switchTab('practice')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Practice</button>
+      <button class="ch-tab" data-tab="pyqs" onclick="switchTab('pyqs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>PYQs</button>
+      <button class="ch-tab" data-tab="ncert" onclick="switchTab('ncert')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>NCERT Q&A</button>
+      <button class="ch-tab" data-tab="diagrams" onclick="switchTab('diagrams')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>Diagrams</button>
+    </div>
+
+    <!-- Tab Panels -->
+    <div id="panel-notes" class="tab-panel active"></div>
+    <div id="panel-practice" class="tab-panel"></div>
+    <div id="panel-pyqs" class="tab-panel"></div>
+    <div id="panel-ncert" class="tab-panel"></div>
+    <div id="panel-diagrams" class="tab-panel"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head"><h3 id="modalTitle">Diagram</h3><button class="modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 StudyHub · <b>Developed by Ansh Yadav</b></span><br>
+      <span>Made with <span class="heart">♥</span> for Class 10 learners</span>
+    </div>
+  </div>
+</footer>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ===================== CONFIG =====================
+const SUPABASE_URL = "https://qijdyaorbvbvuumzdxdu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_jRJUeUmDJ9CMONA75QCCCQ_2aCizXnE";
+
+let sb = null;
+try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.error('Supabase init error', e); }
+
+// ===================== STATE =====================
+let currentClass = null;
+let currentSubject = null;
+let currentChapter = null;
+let currentClassData = null;
+let currentSubjectData = null;
+let currentChapterData = null;
+
+// ===================== NAV =====================
+const nav = document.getElementById('nav');
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h > 0 ? (y/h)*100 : 0) + '%';
+  nav.classList.toggle('scrolled', y > 20);
+}, {passive:true});
+
+// Mobile nav
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ===================== NAVIGATION =====================
+function navigate(page, data) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({top:0, behavior:'smooth'});
+
+  if (page === 'home') loadClasses();
+  if (page === 'chapters' && data) loadChapters(data);
+  if (page === 'detail' && data) loadDetail(data);
+}
+
+// ===================== TILT EFFECT =====================
+function initTilt() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  document.querySelectorAll('.tilt, .class-card, .subject-card, .chapter-item').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      card.style.setProperty('--rx', ((0.5-py)*6).toFixed(2)+'deg');
+      card.style.setProperty('--ry', ((px-0.5)*8).toFixed(2)+'deg');
+      card.style.setProperty('--gx', (px*100).toFixed(1)+'%');
+      card.style.setProperty('--gy', (py*100).toFixed(1)+'%');
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.setProperty('--rx','0deg');
+      card.style.setProperty('--ry','0deg');
+    });
+  });
+}
+
+// ===================== HOME — LOAD CLASS 10 SUBJECTS =====================
+async function loadClasses() {
+  const grid = document.getElementById('homeSubjects');
+  if (!sb) { grid.innerHTML = '<div class="empty"><div class="em-icon">⚠️</div><p>Supabase not connected</p></div>'; return; }
+  
+  try {
+    // Find Class 10
+    const { data: classes, error: classErr } = await sb.from('classes').select('*');
+    if (classErr) throw classErr;
+    
+    let class10 = null;
+    if (classes) {
+      class10 = classes.find(c => {
+        const n = (c.name || '').toLowerCase();
+        return n.includes('10') || n === 'class 10';
+      });
+      if (!class10 && classes.length) {
+        // Fallback: try id=10
+        class10 = classes.find(c => c.id === 10);
+      }
+    }
+    
+    if (!class10) {
+      grid.innerHTML = '<div class="empty"><div class="em-icon">📭</div><p>Class 10 not found in database. Please make sure the classes table has a Class 10 entry.</p></div>';
+      return;
+    }
+
+    // Load subjects for Class 10
+    const { data: subjects, error: subErr } = await sb.from('subject').select('*').eq('class_id', class10.id).order('name');
+    if (subErr) throw subErr;
+    if (!subjects || !subjects.length) {
+      grid.innerHTML = '<div class="empty"><div class="em-icon">📭</div><p>No subjects found for Class 10 yet.</p></div>';
+      return;
+    }
+
+    const icons = {mathematics:'📐',maths:'📐',math:'📐',science:'🔬',english:'📖',hindi:'📝','social science':'🌍',sst:'🌍','social studies':'🌍',physics:'⚛️',chemistry:'🧪',biology:'🧬',computer:'💻',sanskrit:'📜',history:'🏛️',geography:'🗺️',civics:'⚖️',economics:'📊',accountancy:'📒','business studies':'💼'};
+    const gradients = [
+      'linear-gradient(135deg,#f43f5e,#e11d48)','linear-gradient(135deg,#8b5cf6,#6d28d9)','linear-gradient(135deg,#0ea5e9,#0284c7)','linear-gradient(135deg,#f59e0b,#d97706)',
+      'linear-gradient(135deg,#10b981,#059669)','linear-gradient(135deg,#ec4899,#db2777)','linear-gradient(135deg,#6366f1,#4f46e5)','linear-gradient(135deg,#14b8a6,#0d9488)'
+    ];
+    const className = class10.name;
+    const classId = class10.id;
+
+    grid.innerHTML = subjects.map((s, i) => {
+      const icon = icons[s.name.toLowerCase()] || '📘';
+      return `<div class="subject-card" onclick="navigate('chapters',{subjectId:${s.id},subjectName:'${s.name.replace(/'/g,"\\'")}',className:'${className.replace(/'/g,"\\'")}',classId:${classId}})">
+        <div class="sc-top" style="background:${gradients[i%8]}"><span class="sc-icon">${icon}</span></div>
+        <div class="sc-body"><h3>${s.name}</h3><div class="sc-arrow"><span>View Chapters</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    console.error(e);
+    grid.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>Error: ${e.message}</p></div>`;
+  }
+}
+
+// ===================== SUBJECTS =====================
+async function loadSubjects({classId, className}) {
+  currentClass = {id: classId, name: className};
+  const grid = document.getElementById('subjectGrid');
+  document.getElementById('subjectCrumbs').innerHTML = `<a onclick="navigate('home')">Home</a><span class="sep">→</span><span class="cur">${className}</span>`;
+  document.getElementById('subjectTitle').textContent = className + ' — Subjects';
+
+  if (!sb) { grid.innerHTML = '<div class="empty"><div class="em-icon">⚠️</div><p>Supabase not connected</p></div>'; return; }
+  
+  try {
+    const { data, error } = await sb.from('subject').select('*').eq('class_id', classId).order('name');
+    if (error) throw error;
+    if (!data || !data.length) { grid.innerHTML = '<div class="empty"><div class="em-icon">📭</div><p>No subjects found for this class</p></div>'; return; }
+
+    const icons = {mathematics:'📐',maths:'📐',math:'📐',science:'🔬',english:'📖',hindi:'📝','social science':'🌍',sst:'🌍',physics:'⚛️',chemistry:'🧪',biology:'🧬',computer:'💻',sanskrit:'📜',history:'🏛️',geography:'🗺️',civics:'⚖️',economics:'📊',accountancy:'📒','business studies':'💼'};
+    const gradients = [
+      'linear-gradient(135deg,#f43f5e,#e11d48)','linear-gradient(135deg,#8b5cf6,#6d28d9)','linear-gradient(135deg,#0ea5e9,#0284c7)','linear-gradient(135deg,#f59e0b,#d97706)',
+      'linear-gradient(135deg,#10b981,#059669)','linear-gradient(135deg,#ec4899,#db2777)','linear-gradient(135deg,#6366f1,#4f46e5)','linear-gradient(135deg,#14b8a6,#0d9488)'
+    ];
+
+    grid.innerHTML = data.map((s, i) => {
+      const icon = icons[s.name.toLowerCase()] || '📘';
+      return `<div class="subject-card" onclick="navigate('chapters',{subjectId:${s.id},subjectName:'${s.name.replace(/'/g,"\\'")}',className:'${className.replace(/'/g,"\\'")}',classId:${classId}})">
+        <div class="sc-top" style="background:${gradients[i%8]}"><span class="sc-icon">${icon}</span></div>
+        <div class="sc-body"><h3>${s.name}</h3><div class="sc-arrow"><span>View Chapters</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    console.error(e);
+    grid.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>Error: ${e.message}</p></div>`;
+  }
+}
+
+// ===================== CHAPTERS =====================
+async function loadChapters({subjectId, subjectName, className, classId}) {
+  currentSubject = {id: subjectId, name: subjectName};
+  currentClass = {id: classId, name: className};
+  const list = document.getElementById('chapterList');
+  document.getElementById('chapterCrumbs').innerHTML = `<a onclick="navigate('home')">Home</a><span class="sep">→</span><a onclick="navigate('home')">Class 10</a><span class="sep">→</span><span class="cur">${subjectName}</span>`;
+  document.getElementById('chapterTitle').textContent = subjectName;
+
+  if (!sb) { list.innerHTML = '<div class="empty"><div class="em-icon">⚠️</div><p>Supabase not connected</p></div>'; return; }
+
+  try {
+    const { data, error } = await sb.from('chapters').select('*').eq('subject_id', subjectId).order('id');
+    if (error) throw error;
+    if (!data || !data.length) { list.innerHTML = '<div class="empty"><div class="em-icon">📭</div><p>No chapters found</p></div>'; return; }
+
+    list.innerHTML = data.map((ch, i) => `<div class="chapter-item" onclick="navigate('detail',{chapterId:${ch.id},chapterName:\`${ch.name.replace(/`/g,"\\`")}\`,subjectName:'${subjectName.replace(/'/g,"\\'")}',subjectId:${subjectId},className:'${className.replace(/'/g,"\\'")}',classId:${classId}})">
+      <span class="ci-num">${i+1}</span>
+      <span class="ci-name">${ch.name}</span>
+      <span class="ci-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+    </div>`).join('');
+    initTilt();
+  } catch(e) {
+    console.error(e);
+    list.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>Error: ${e.message}</p></div>`;
+  }
+}
+
+// ===================== CHAPTER DETAIL =====================
+async function loadDetail({chapterId, chapterName, subjectName, subjectId, className, classId}) {
+  currentChapter = {id: chapterId, name: chapterName};
+  currentSubject = {id: subjectId, name: subjectName};
+  currentClass = {id: classId, name: className};
+
+  document.getElementById('detailCrumbs').innerHTML = `<a onclick="navigate('home')">Home</a><span class="sep">→</span><a onclick="navigate('home')">Class 10</a><span class="sep">→</span><a onclick="navigate('chapters',{subjectId:${subjectId},subjectName:'${subjectName.replace(/'/g,"\\'")}',className:'${className.replace(/'/g,"\\'")}',classId:${classId}})">${subjectName}</a><span class="sep">→</span><span class="cur">${chapterName}</span>`;
+  document.getElementById('detailTitle').textContent = chapterName;
+
+  // Reset tabs
+  switchTab('notes');
+
+  // Load all tab data
+  loadNotes(chapterId);
+  loadPractice(chapterId);
+  loadPYQs(chapterId);
+  loadNCERT(chapterId);
+  loadDiagrams(chapterId);
+}
+
+// ===================== TABS =====================
+function switchTab(tab) {
+  document.querySelectorAll('.ch-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// ===================== NOTES =====================
+async function loadNotes(chapterId) {
+  const panel = document.getElementById('panel-notes');
+  panel.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading notes...</p></div>';
+  if (!sb) { panel.innerHTML = '<div class="empty"><div class="em-icon">⚠️</div><p>Not connected</p></div>'; return; }
+
+  try {
+    const [notesRes, diagRes] = await Promise.all([
+      sb.from('notes').select('*').eq('chapter_id', chapterId).order('id'),
+      sb.from('diagrams').select('*').eq('chapter_id', chapterId)
+    ]);
+    if (notesRes.error) throw notesRes.error;
+    const notes = notesRes.data || [];
+    const diagrams = diagRes.data || [];
+
+    if (!notes.length) { panel.innerHTML = '<div class="empty"><div class="em-icon">📝</div><p>No notes available yet</p></div>'; return; }
+
+    panel.innerHTML = notes.map((n, i) => `<div class="note-card">
+      <div class="note-head" onclick="toggleNote(this)">
+        <span class="nh-num">${i+1}</span>
+        <span class="nh-title">${n.title || 'Note ' + (i+1)}</span>
+        <svg class="nh-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <div class="note-content">${n.fully_explained_notes || n.content || '<em>No content</em>'}</div>
+        ${diagrams.length ? `<div class="note-diagrams"><h4>Diagrams</h4><div class="diag-grid">${diagrams.map(d => `<div class="diag-card" onclick="openDiagram('${(d.title||'').replace(/'/g,"\\'")}', \`${(d.svg_code||'').replace(/`/g,"\\`")}\`)">${d.svg_code || ''}<p>${d.title || ''}</p>${d.is_animated ? '<span class="anim-badge">✨ Animated</span>' : ''}</div>`).join('')}</div></div>` : ''}
+      </div>
+    </div>`).join('');
+  } catch(e) {
+    panel.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function toggleNote(head) {
+  head.classList.toggle('open');
+  head.nextElementSibling.classList.toggle('open');
+}
+
+// ===================== PRACTICE =====================
+let quizState = { questions: [], idx: 0, score: 0, selected: null, answered: false };
+
+async function loadPractice(chapterId) {
+  const panel = document.getElementById('panel-practice');
+  panel.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading questions...</p></div>';
+  if (!sb) { panel.innerHTML = '<div class="empty"><div class="em-icon">⚠️</div><p>Not connected</p></div>'; return; }
+
+  try {
+    const { data, error } = await sb.from('questions').select('*').eq('chapter_id', chapterId).order('id');
+    if (error) throw error;
+    if (!data || !data.length) { panel.innerHTML = '<div class="empty"><div class="em-icon">❓</div><p>No practice questions yet</p></div>'; return; }
+
+    quizState = { questions: data, idx: 0, score: 0, selected: null, answered: false };
+    renderQuiz(panel);
+  } catch(e) {
+    panel.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function renderQuiz(panel) {
+  const { questions, idx, score } = quizState;
+  if (idx >= questions.length) {
+    const pct = Math.round((score/questions.length)*100);
+    panel.innerHTML = `<div class="quiz-wrap"><div class="quiz-card"><div class="quiz-result">
+      <div class="qr-ring" style="--pct:${pct}%"><b>${score}/${questions.length}</b></div>
+      <h2 style="font-size:1.5rem;font-weight:800;margin:10px 0">${pct>=70?'🎉 Excellent!':pct>=40?'💪 Good effort!':'📚 Keep studying!'}</h2>
+      <p style="color:var(--muted);margin-bottom:20px">You scored ${pct}%</p>
+      <button class="btn btn-primary btn-sm" onclick="quizState.idx=0;quizState.score=0;renderQuiz(document.getElementById('panel-practice'))">Retake Quiz</button>
+    </div></div></div>`;
+    return;
+  }
+
+  const q = questions[idx];
+  const opts = Array.isArray(q.options) ? q.options : [];
+  const progress = ((idx)/questions.length)*100;
+
+  panel.innerHTML = `<div class="quiz-wrap">
+    <div class="quiz-progress"><div class="qp-info"><span>Question ${idx+1} of ${questions.length}</span><span>Score: ${score}</span></div><div class="qp-bar"><div class="qp-fill" style="width:${progress}%"></div></div></div>
+    <div class="quiz-card">
+      <p class="qq">${q.question}</p>
+      <div class="q-opts">${opts.map((o,i) => {
+        const label = typeof o === 'string' ? o : (o.text || o.label || JSON.stringify(o));
+        return `<button class="q-opt" data-idx="${i}" data-val="${label.replace(/"/g,'&quot;')}" onclick="selectQuizOpt(this)"><span class="ol">${String.fromCharCode(65+i)}</span><span>${label}</span></button>`;
+      }).join('')}</div>
+      <div class="quiz-fb" id="quizFb"></div>
+      <div class="quiz-actions">
+        <button class="btn btn-primary btn-sm" id="quizCheck" onclick="checkQuizAnswer()">Check Answer</button>
+        <button class="btn btn-glass btn-sm" id="quizNext" style="display:none" onclick="nextQuizQuestion()">Next →</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function selectQuizOpt(btn) {
+  if (quizState.answered) return;
+  quizState.selected = btn.dataset.val;
+  document.querySelectorAll('.q-opt').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+function checkQuizAnswer() {
+  if (!quizState.selected) {
+    const fb = document.getElementById('quizFb');
+    fb.className = 'quiz-fb show err';
+    fb.innerHTML = '<b>Please select an option</b>';
+    return;
+  }
+  quizState.answered = true;
+  const q = quizState.questions[quizState.idx];
+  const correct = q.correct_answer;
+  const isCorrect = quizState.selected === correct;
+  if (isCorrect) quizState.score++;
+
+  document.querySelectorAll('.q-opt').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.val === correct) b.classList.add('ok');
+    else if (b.classList.contains('sel')) b.classList.add('bad');
+  });
+
+  const fb = document.getElementById('quizFb');
+  fb.className = 'quiz-fb show ' + (isCorrect ? 'ok' : 'err');
+  fb.innerHTML = `<b>${isCorrect ? '✅ Correct!' : '❌ Incorrect'}</b>${q.explanation ? '<br>' + q.explanation : ''}`;
+  document.getElementById('quizCheck').style.display = 'none';
+  document.getElementById('quizNext').style.display = '';
+}
+
+function nextQuizQuestion() {
+  quizState.idx++;
+  quizState.selected = null;
+  quizState.answered = false;
+  renderQuiz(document.getElementById('panel-practice'));
+}
+
+// ===================== PYQS =====================
+async function loadPYQs(chapterId) {
+  const panel = document.getElementById('panel-pyqs');
+  panel.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading PYQs...</p></div>';
+  if (!sb) { panel.innerHTML = '<div class="empty"><div class="em-icon">⚠️</div><p>Not connected</p></div>'; return; }
+
+  try {
+    const { data, error } = await sb.from('pyqs').select('*').eq('chapter_id', chapterId).order('year', {ascending:false});
+    if (error) throw error;
+    if (!data || !data.length) { panel.innerHTML = '<div class="empty"><div class="em-icon">📋</div><p>No PYQs available yet</p></div>'; return; }
+
+    const years = [...new Set(data.map(p => p.year).filter(Boolean))];
+    const boards = [...new Set(data.map(p => p.board_year).filter(Boolean))];
+
+    panel.innerHTML = `<div class="filter-bar">
+      <select id="pyqYear" onchange="filterPYQs()"><option value="all">All Years</option>${years.map(y => `<option value="${y}">${y}</option>`).join('')}</select>
+      <select id="pyqBoard" onchange="filterPYQs()"><option value="all">All Boards</option>${boards.map(b => `<option value="${b}">${b}</option>`).join('')}</select>
+      <span class="fcount" id="pyqCount">${data.length} questions</span>
+    </div>
+    <div id="pyqList">${renderPYQItems(data)}</div>`;
+    panel._data = data;
+  } catch(e) {
+    panel.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function renderPYQItems(items) {
+  return items.map(p => `<div class="acc-item">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="ah-tags">${p.year ? `<span class="ah-tag year">${p.year}</span>` : ''}${p.board_year ? `<span class="ah-tag board">${p.board_year}</span>` : ''}</div>
+      <span class="ah-q">${p.question}</span>
+      <svg class="ah-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="acc-body">${p.correct_answer ? `<div class="acc-answer"><span class="label">Answer</span>${p.correct_answer}</div>` : '<p style="color:var(--muted);padding:12px 0">Answer not available</p>'}</div>
+  </div>`).join('');
+}
+
+function filterPYQs() {
+  const panel = document.getElementById('panel-pyqs');
+  const data = panel._data;
+  const year = document.getElementById('pyqYear').value;
+  const board = document.getElementById('pyqBoard').value;
+  const filtered = data.filter(p => {
+    if (year !== 'all' && p.year != year) return false;
+    if (board !== 'all' && p.board_year !== board) return false;
+    return true;
+  });
+  document.getElementById('pyqList').innerHTML = renderPYQItems(filtered);
+  document.getElementById('pyqCount').textContent = filtered.length + ' questions';
+}
+
+// ===================== NCERT =====================
+async function loadNCERT(chapterId) {
+  const panel = document.getElementById('panel-ncert');
+  panel.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading NCERT questions...</p></div>';
+  if (!sb) { panel.innerHTML = '<div class="empty"><div class="em-icon">⚠️</div><p>Not connected</p></div>'; return; }
+
+  try {
+    const { data, error } = await sb.from('ncert_textbook_questions').select('*').eq('chapter_id', chapterId).order('section').order('question_number');
+    if (error) throw error;
+    if (!data || !data.length) { panel.innerHTML = '<div class="empty"><div class="em-icon">📚</div><p>No NCERT questions yet</p></div>'; return; }
+
+    const sections = [...new Set(data.map(q => q.section).filter(Boolean))];
+
+    panel.innerHTML = `${sections.length > 1 ? `<div class="filter-bar"><select id="ncertSec" onchange="filterNCERT()"><option value="all">All Sections</option>${sections.map(s => `<option value="${s}">${s}</option>`).join('')}</select><span class="fcount" id="ncertCount">${data.length} questions</span></div>` : ''}
+    <div id="ncertList">${renderNCERTItems(data)}</div>`;
+    panel._data = data;
+  } catch(e) {
+    panel.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function renderNCERTItems(items) {
+  return items.map(q => `<div class="acc-item">
+    <div class="acc-head" onclick="toggleAcc(this)">
+      <div class="ah-tags"><span class="ah-tag qnum">Q${q.question_number || '?'}</span>${q.section ? `<span class="ah-tag sec">${q.section}</span>` : ''}</div>
+      <span class="ah-q">${q.question}</span>
+      <svg class="ah-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="acc-body">${q.answer ? `<div class="acc-answer"><span class="label">Answer</span>${q.answer}</div>` : '<p style="color:var(--muted);padding:12px 0">Answer not available</p>'}</div>
+  </div>`).join('');
+}
+
+function filterNCERT() {
+  const panel = document.getElementById('panel-ncert');
+  const data = panel._data;
+  const sec = document.getElementById('ncertSec').value;
+  const filtered = sec === 'all' ? data : data.filter(q => q.section === sec);
+  document.getElementById('ncertList').innerHTML = renderNCERTItems(filtered);
+  document.getElementById('ncertCount').textContent = filtered.length + ' questions';
+}
+
+// ===================== DIAGRAMS =====================
+async function loadDiagrams(chapterId) {
+  const panel = document.getElementById('panel-diagrams');
+  panel.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading diagrams...</p></div>';
+  if (!sb) { panel.innerHTML = '<div class="empty"><div class="em-icon">⚠️</div><p>Not connected</p></div>'; return; }
+
+  try {
+    const { data, error } = await sb.from('diagrams').select('*').eq('chapter_id', chapterId).order('id');
+    if (error) throw error;
+    if (!data || !data.length) { panel.innerHTML = '<div class="empty"><div class="em-icon">🎨</div><p>No diagrams available yet</p></div>'; return; }
+
+    panel.innerHTML = `<div class="diag-gallery">${data.map(d => `<div class="gallery-card" onclick="openDiagram('${(d.title||'').replace(/'/g,"\\'")}', \`${(d.svg_code||'').replace(/`/g,"\\`")}\`)">
+      <div class="gc-art">${d.svg_code || ''}</div>
+      <div class="gc-body"><h4>${d.title || d.diagram_key || 'Untitled'}</h4>${d.is_animated ? '<span class="anim-badge">✨ Animated</span>' : ''}</div>
+    </div>`).join('')}</div>`;
+  } catch(e) {
+    panel.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+// ===================== ACCORDION =====================
+function toggleAcc(head) {
+  head.classList.toggle('open');
+  head.nextElementSibling.classList.toggle('open');
+}
+
+// ===================== MODAL =====================
+function openDiagram(title, svg) {
+  document.getElementById('modalTitle').textContent = title || 'Diagram';
+  document.getElementById('modalBody').innerHTML = svg || '';
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal')) return;
+  document.getElementById('modal').classList.remove('show');
+}
+
+// ===================== INIT =====================
+loadClasses();
+
+// ===================== NOTICE BANNER =====================
+function dismissNotice() {
+  const bar = document.getElementById('noticeBar');
+  bar.classList.add('dismissed');
+  setTimeout(() => { bar.style.display = 'none'; }, 400);
+  try { localStorage.setItem('studyhub_notice_dismissed', '1'); } catch(e) {}
+}
+// Auto-hide if previously dismissed (session only — shows again on new visit)
+try {
+  if (sessionStorage.getItem('studyhub_notice_dismissed') === '1') {
+    document.getElementById('noticeBar').style.display = 'none';
+  }
+} catch(e) {}
+// Store dismissal for this session only
+const _origDismiss = dismissNotice;
+dismissNotice = function() {
+  _origDismiss();
+  try { sessionStorage.setItem('studyhub_notice_dismissed', '1'); } catch(e) {}
+};
+</script>
+</body>
+</html>
