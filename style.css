@@ -219,9 +219,176 @@ ul{list-style:none}
 .footer-bottom b{color:#f9c6d3;font-weight:700}
 .footer-bottom .heart{color:#f43f5e}
 
-@media(max-width:1080px){.class-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.class-grid{grid-template-columns:1fr}.subject-grid{grid-template-columns:repeat(2,1fr)}.diag-gallery{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:400px){.subject-grid{grid-template-columns:1fr}.diag-gallery{grid-template-columns:1fr}}
+/* ============ GLOBAL OVERFLOW SAFETY ============ */
+html,body{overflow-x:hidden;max-width:100vw}
+.page,.container,.section-pad{max-width:100%;overflow-x:hidden}
+h1,h2,h3,p,span,.btn,.eyebrow,.crumbs,.cs-badge{overflow-wrap:break-word;word-wrap:break-word}
+
+/* ============ RESPONSIVE BREAKPOINTS ============ */
+
+/* Tablet landscape / small laptop */
+@media(max-width:1080px){
+  .class-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Tablet portrait */
+@media(max-width:920px){
+  .nav-inner{gap:12px}
+  .brand-mark{width:36px;height:36px;border-radius:11px}
+  .brand{font-size:1.1rem;gap:8px}
+  .user-menu{gap:6px}
+}
+
+/* Large phones / small tablets */
+@media(max-width:768px){
+  .container{width:94%;padding:0}
+  .section-pad{padding:clamp(20px,4vw,40px) 0}
+  .hero-mini{padding:clamp(20px,4vw,30px) 0 clamp(16px,3vw,24px)}
+  .hero-mini h1{font-size:clamp(26px,7vw,36px)}
+
+  /* Subject grid: 2 columns */
+  .subject-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding-bottom:40px}
+
+  /* Chapter tabs: compact */
+  .ch-tab{padding:10px 12px;font-size:.82rem;gap:5px}
+  .ch-tab svg{width:16px;height:16px}
+
+  /* Chat: full width, shorter */
+  .chat-wrap{max-width:100%;border-radius:var(--r-md);height:calc(100vh - var(--nav-h) - 80px);min-height:350px}
+  .chat-header{padding:12px 14px;gap:10px}
+  .chat-header h3{font-size:.95rem}
+  .chat-header span{font-size:.72rem}
+  .chat-feed{padding:12px 14px}
+  .chat-bubble{max-width:85%;font-size:.85rem;padding:8px 12px}
+  .chat-input-bar{padding:10px 12px;gap:8px}
+  .chat-input{padding:10px 14px;font-size:.85rem}
+  .chat-send{width:38px;height:38px}
+  .chat-online-badge{padding:5px 10px;font-size:.72rem}
+
+  /* Dashboard: compact stat cards */
+  .dash-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .dash-stat{padding:16px 14px}
+  .dash-stat .ds-num{font-size:1.4rem}
+  .dash-stat .ds-icon{width:36px;height:36px;margin-bottom:8px}
+  .dash-stat .ds-icon svg{width:18px;height:18px}
+
+  /* Dashboard activity items: wrap */
+  .dash-item{flex-wrap:wrap;gap:8px;padding:12px}
+  .dash-item .di-date{width:100%;text-align:right}
+
+  /* Admin rows: wrap on mobile */
+  .admin-user-row{flex-wrap:wrap;gap:8px}
+  .admin-user-row .au-class{margin-left:auto}
+  .admin-btn{width:auto}
+
+  /* Admin header: stack */
+  .admin-header{flex-direction:column;align-items:flex-start}
+
+  /* Note body: tighter padding */
+  .note-body{padding:0 14px 14px}
+  .note-head{padding:14px 16px;gap:10px}
+  .note-head .nh-title{font-size:.9rem}
+
+  /* Quiz: compact */
+  .quiz-card{padding:20px 16px}
+  .q-opt{padding:12px 14px;font-size:.9rem;gap:10px}
+  .q-opt .ol{width:30px;height:30px;font-size:.82rem}
+
+  /* Accordion: compact */
+  .acc-head{padding:12px 14px;gap:8px}
+  .acc-head .ah-q{font-size:.85rem}
+  .acc-body{padding:0 14px 14px}
+
+  /* About card: compact */
+  .about-card{padding:clamp(24px,5vw,36px) clamp(16px,4vw,28px)}
+  .about-links{flex-direction:column;align-items:center}
+  .about-links a{width:100%;justify-content:center}
+
+  /* Coming soon: compact */
+  .cs-card{padding:clamp(20px,4vw,30px) clamp(16px,4vw,24px)}
+  .cs-classes{gap:6px}
+  .cs-classes span{font-size:.72rem;padding:5px 10px}
+
+  /* Blocked chat view: compact */
+  .chat-blocked-card{padding:clamp(24px,5vw,36px) clamp(16px,4vw,24px)}
+  .chat-blocked-links{flex-direction:column;align-items:stretch}
+  .chat-blocked-links a{justify-content:center}
+
+  /* Modal: tighter */
+  .modal-box{border-radius:var(--r-md)}
+  .modal-body{padding:16px;min-height:200px}
+}
+
+/* Phones */
+@media(max-width:640px){
+  .class-grid{grid-template-columns:1fr}
+  .subject-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .subject-card .sc-top{height:90px}
+  .subject-card .sc-icon{font-size:2.2rem}
+  .subject-card .sc-body{padding:12px 14px}
+  .subject-card h3{font-size:.95rem}
+
+  .diag-gallery{grid-template-columns:repeat(2,1fr);gap:10px}
+  .diag-grid{grid-template-columns:repeat(2,1fr)}
+
+  /* Chapter item: compact */
+  .chapter-item{padding:14px 16px;gap:12px}
+  .chapter-item .ci-num{width:38px;height:38px;font-size:.9rem;border-radius:12px}
+  .chapter-item .ci-name{font-size:.9rem}
+
+  /* Dashboard: single column stats */
+  .dash-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+
+  /* User menu: hide name */
+  .user-name{display:none}
+
+  /* Breadcrumbs: smaller */
+  .crumbs{font-size:.78rem;gap:6px}
+
+  /* Filter bar: full width selects */
+  .filter-bar{flex-direction:column;align-items:stretch}
+  .filter-bar select{width:100%}
+  .filter-bar .fcount{text-align:center;margin-left:0}
+
+  /* Buttons: full width on small */
+  .quiz-actions{flex-direction:column}
+  .quiz-actions .btn{width:100%;justify-content:center}
+
+  /* Hero: smaller */
+  .hero-mini h1{font-size:clamp(24px,6.5vw,32px)}
+  .hero-mini p{font-size:clamp(13px,3.5vw,15px)}
+
+  /* Eyebrow: smaller */
+  .eyebrow{font-size:.7rem;padding:6px 12px;gap:6px}
+
+  /* Section head: tighter */
+  .section-head h2{font-size:clamp(22px,5.5vw,30px)}
+
+  /* Footer: compact */
+  .footer-bottom{font-size:.78rem;padding:18px 0}
+}
+
+/* Very small phones */
+@media(max-width:400px){
+  .container{width:96%}
+  .subject-grid{grid-template-columns:1fr}
+  .diag-gallery{grid-template-columns:1fr}
+  .diag-grid{grid-template-columns:1fr}
+  .dash-grid{grid-template-columns:1fr}
+
+  /* Chat: even more compact */
+  .chat-bubble{max-width:90%}
+  .chat-header h3{font-size:.88rem}
+
+  /* Brand: smaller */
+  .brand{font-size:1rem;gap:6px}
+  .brand-mark{width:32px;height:32px;border-radius:10px}
+  .brand-mark svg{width:18px;height:18px}
+
+  /* Tabs: very compact */
+  .ch-tab{padding:8px 10px;font-size:.78rem;gap:4px}
+  .ch-tab span{display:none}
+}
 
 .section-pad{padding:clamp(30px,5vw,60px) 0}
 
@@ -273,6 +440,16 @@ ul{list-style:none}
 .auth-switch{text-align:center;margin-top:16px;font-size:.88rem;color:var(--muted);font-weight:600}
 .auth-switch a{color:var(--rose-600);font-weight:700;cursor:pointer;transition:color .2s}
 .auth-switch a:hover{color:var(--rose-800)}
+
+/* Google Sign-In Button */
+.auth-google{width:100%;padding:12px 20px;border:1.5px solid var(--line);border-radius:var(--r-sm);background:#fff;font-size:.92rem;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .25s var(--ease);font-family:var(--font)}
+.auth-google:hover{border-color:rgba(225,29,72,.35);box-shadow:var(--shadow-sm);transform:translateY(-2px)}
+.auth-google svg{flex:none}
+
+/* Auth Divider */
+.auth-divider{display:flex;align-items:center;gap:12px;margin:4px 0;color:var(--muted);font-size:.82rem;font-weight:600}
+.auth-divider::before,.auth-divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.auth-divider span{flex:none}
 
 /* ============ USER MENU ============ */
 .user-menu{display:flex;align-items:center;gap:8px}

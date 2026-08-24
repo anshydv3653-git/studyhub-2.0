@@ -392,6 +392,19 @@ async function doLogin() {
   } catch(e) { showAuthMsg('❌ ' + e.message, 'err'); }
 }
 
+async function loginWithGoogle() {
+  if (!sb) { showAuthMsg('⚠️ Connection error. Please refresh and try again.', 'err'); return; }
+  try {
+    showAuthMsg('⏳ Redirecting to Google...', 'ok');
+    const { error } = await sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.origin }
+    });
+    if (error) throw error;
+    // Browser will redirect to Google — no further code needed here
+  } catch(e) { showAuthMsg('❌ Google sign-in failed: ' + e.message, 'err'); }
+}
+
 async function doSignup() {
   const email = document.getElementById('signupEmail').value.trim();
   const password = document.getElementById('signupPassword').value;
