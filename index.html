@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="Zfy6XoYKr_gwuosnjzWMN5TXu3unrYLZ_S6hc7dHoiE" />
+<title>StudyHub — Class 10 Notes, PYQs & Practice | Learn Smarter. Score Higher.</title>
+<meta name="theme-color" content="#e11d48">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23e11d48'/><path d='M20 46V22l12-6 12 6v24' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/><path d='M20 30l12 6 12-6' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ============ AUTH OVERLAY ============ -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-bg"></div>
+  <div class="auth-card">
+    <div class="auth-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+    <h2 class="auth-title" id="authTitle">Welcome to StudyHub 2.0</h2>
+    <p class="auth-subtitle" id="authSubtitle">Best of luck — score 100 out of 100 in your Boards 2027! 🎯</p>
+
+    <!-- LOGIN FORM -->
+    <div class="auth-form" id="authLoginForm">
+      <input type="email" class="auth-input" id="loginEmail" placeholder="Email address" autocomplete="email">
+      <input type="password" class="auth-input" id="loginPassword" placeholder="Password" autocomplete="current-password">
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doLogin()">Sign In <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      <div class="auth-switch">Don't have an account? <a onclick="switchAuthMode('signup')">Sign up free</a></div>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div class="auth-form" id="authSignupForm" style="display:none">
+      <input type="email" class="auth-input" id="signupEmail" placeholder="Email address" autocomplete="email">
+      <input type="password" class="auth-input" id="signupPassword" placeholder="Password (min 6 characters)" autocomplete="new-password">
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doSignup()">Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      <div class="auth-switch">Already have an account? <a onclick="switchAuthMode('login')">Sign in</a></div>
+    </div>
+
+    <!-- ONBOARDING FORM -->
+    <div class="auth-form" id="authOnboardForm" style="display:none">
+      <input type="text" class="auth-input" id="onboardName" placeholder="Your full name" autocomplete="name">
+      <select class="auth-select" id="onboardClass">
+        <option value="">Select your class</option>
+        <option value="1">Class 9</option>
+        <option value="2">Class 10</option>
+        <option value="3">Class 11</option>
+        <option value="4">Class 12</option>
+      </select>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doOnboard()">Save & Start Learning <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+    </div>
+
+    <div class="auth-msg" id="authMsg"></div>
+  </div>
+</div>
+
+<!-- ============ NOTICE MODAL ============ -->
+<div class="notice-modal-overlay" id="noticeModal">
+  <div class="notice-modal">
+    <button class="notice-modal-close" onclick="dismissNoticeModal()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="notice-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg></div>
+    <h3 class="notice-modal-title">Quick Update 📢</h3>
+    <p class="notice-modal-text">A few Class 10 topics are still being prepared — please don't worry about it. <b>Everything will be fully available within the next 24–48 hours.</b><br><br>Until then, keep studying and stay focused. You've got this! 📚</p>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" onclick="navigate('home')"><span class="brand-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>Study<em>Hub</em></a>
+    <nav class="nav-links" id="navLinks">
+      <a onclick="navigate('home')" class="active">Home</a>
+      <a onclick="navigate('dashboard')">My Account</a>
+      <a onclick="navigate('chat')">Community Chat</a>
+    </nav>
+    <div class="user-menu" id="userMenu" style="display:none">
+      <div class="user-avatar" id="userAvatar">A</div>
+      <span class="user-name" id="userName"></span>
+      <button class="user-logout" onclick="logoutUser()" title="Sign out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg></button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="page active">
+  <div class="container">
+    <div class="hero-mini">
+      <h1>Learn Smarter.<br>Understand Better. <span class="hl">Score Higher.</span></h1>
+      <p>Complete Class 10 study companion — Notes, Diagrams, Practice, PYQs and NCERT solutions, all in one place.</p>
+    </div>
+    <div class="section-head center" style="margin-top:40px">
+      <span class="eyebrow">Class 10</span>
+      <h2>Choose a subject</h2>
+      <p>Tap any subject to explore chapter-wise notes, practice questions, previous year papers and more.</p>
+    </div>
+    <div class="subject-grid" id="homeSubjects">
+      <div class="loading"><div class="spinner"></div><p>Loading subjects...</p></div>
+    </div>
+
+    <!-- ADSTERRA NATIVE BANNER AD -->
+    <div class="ad-native-wrap">
+      <script async="async" data-cfasync="false" src="https://pl31013050.profitableratecpmnetwork.com/b7a3ce0a49fa2ce2303da20ca8cf30cd/invoke.js"></script>
+      <div id="container-b7a3ce0a49fa2ce2303da20ca8cf30cd"></div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+      <div class="about-card">
+        <span class="eyebrow" style="margin-bottom:18px">About the developer</span>
+        <div class="about-avatar">A</div>
+        <h3>Ansh Yadav</h3>
+        <p class="about-role">Founder & Developer</p>
+        <div class="about-links">
+          <a href="https://instagram.com/build_with_ansh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>@build_with_ansh</a>
+          <a href="mailto:sparkai.automation@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>sparkai.automation@gmail.com</a>
+        </div>
+        <p class="about-quote">Building technology to make learning simpler, smarter and accessible for every student.</p>
+        <span class="about-sign">— Ansh</span>
+      </div>
+    </section>
+
+    <!-- COMING SOON -->
+    <section class="coming-soon">
+      <div class="cs-card">
+        <span class="cs-badge">Coming Soon</span>
+        <h3>Class 9, 11 & 12 Material is on its way</h3>
+        <p>I'm currently a Class 10 student myself, and with board exams around the corner, my full focus is on making the Class 10 content as thorough and helpful as possible. Once boards are done, I'll be working on adding complete study material for Class 9, 11 and 12 — same quality, same care. Thank you for your patience and support. It truly means a lot. 🙏</p>
+        <div class="cs-classes">
+          <span class="coming">Class 9 — Coming Soon</span>
+          <span class="live">Class 10 — Live Now ✅</span>
+          <span class="coming">Class 11 — Coming Soon</span>
+          <span class="coming">Class 12 — Coming Soon</span>
+        </div>
+        <p style="margin-top:16px;font-size:.85rem;color:var(--muted)">If you have any issues with the study material, need something specific, or just want to say hi — feel free to DM on Instagram or send an email. I read every message.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ============ CHAPTERS PAGE ============ -->
+<div id="page-chapters" class="page">
+  <div class="container section-pad">
+    <div class="crumbs" id="chapterCrumbs"></div>
+    <h1 id="chapterTitle" style="font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.03em;margin-bottom:28px"></h1>
+    <div class="chapter-list-wrap" id="chapterList">
+      <div class="loading"><div class="spinner"></div><p>Loading chapters...</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER DETAIL PAGE ============ -->
+<div id="page-detail" class="page">
+  <div class="container section-pad">
+    <div class="crumbs" id="detailCrumbs"></div>
+    <h1 id="detailTitle" style="font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:20px"></h1>
+    <div class="ch-tabs" id="detailTabs">
+      <button class="ch-tab active" data-tab="notes" onclick="switchTab('notes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</button>
+      <button class="ch-tab" data-tab="practice" onclick="switchTab('practice')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Practice</button>
+      <button class="ch-tab" data-tab="pyqs" onclick="switchTab('pyqs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>PYQs</button>
+      <button class="ch-tab" data-tab="ncert" onclick="switchTab('ncert')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>NCERT Q&A</button>
+      <button class="ch-tab" data-tab="diagrams" onclick="switchTab('diagrams')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>Diagrams</button>
+    </div>
+    <div id="panel-notes" class="tab-panel active"></div>
+    <div id="panel-practice" class="tab-panel"></div>
+    <div id="panel-pyqs" class="tab-panel"></div>
+    <div id="panel-ncert" class="tab-panel"></div>
+    <div id="panel-diagrams" class="tab-panel"></div>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD PAGE ============ -->
+<div id="page-dashboard" class="page">
+  <div class="container section-pad">
+    <div class="section-head">
+      <span class="eyebrow">My Account</span>
+      <h2>Welcome back, <span id="dashName">Student</span>!</h2>
+      <p>Track your study progress and see how much you've covered.</p>
+    </div>
+    <div id="dashContent">
+      <div class="loading"><div class="spinner"></div><p>Loading dashboard...</p></div>
+    </div>
+
+    <!-- ADMIN PANEL (founder only — shown/hidden by JS) -->
+    <div id="adminPanel" style="display:none">
+      <div class="admin-section">
+        <div class="admin-header">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>Admin Panel — Manage Students</h3>
+          <span class="admin-badge">Founder Access</span>
+        </div>
+
+        <!-- Blocked Users -->
+        <div class="admin-block">
+          <h4>🚫 Blocked Users</h4>
+          <div id="adminBlockedList" class="admin-user-list">
+            <p class="admin-empty">No blocked users</p>
+          </div>
+        </div>
+
+        <!-- All Students -->
+        <div class="admin-block">
+          <h4>👥 All Registered Students</h4>
+          <div class="admin-search">
+            <input type="text" id="adminSearch" placeholder="Search by name..." oninput="filterAdminStudents()">
+          </div>
+          <div id="adminStudentList" class="admin-user-list">
+            <div class="loading"><div class="spinner"></div><p>Loading students...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHAT PAGE ============ -->
+<div id="page-chat" class="page">
+  <div class="container section-pad">
+    <!-- BLOCKED VIEW (hidden by default) -->
+    <div class="chat-blocked-view" id="chatBlockedView" style="display:none">
+      <div class="chat-blocked-card">
+        <div class="chat-blocked-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" x2="19.07" y1="4.93" y2="19.07"/></svg></div>
+        <h2>You have been blocked from the chat</h2>
+        <p>The founder of StudyHub has restricted your access to the community chat. This may be due to inappropriate language or violation of community guidelines.</p>
+        <p class="chat-blocked-sub">If you think this is a mistake, please reach out to the founder:</p>
+        <div class="chat-blocked-links">
+          <a href="https://instagram.com/build_with_ansh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>@build_with_ansh</a>
+          <a href="mailto:sparkai.automation@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>sparkai.automation@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <!-- NORMAL CHAT VIEW -->
+    <div class="chat-wrap" id="chatWrap">
+      <div class="chat-header">
+        <div class="ch-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div style="flex:1"><h3>Student Community</h3><span>Live group chat — all students welcome</span></div>
+        <div class="chat-online-badge" id="chatOnlineBadge" onclick="toggleOnlineList()">
+          <span class="chat-online-dot"></span>
+          <span id="chatOnlineCount">0</span> online
+        </div>
+      </div>
+      <div class="chat-online-panel" id="chatOnlinePanel" style="display:none">
+        <div class="chat-online-title">Online Now</div>
+        <div class="chat-online-list" id="chatOnlineList"></div>
+      </div>
+      <div class="chat-feed" id="chatFeed">
+        <div class="chat-empty"><div class="ce-icon">👋</div><p>Say hi to your fellow students!</p></div>
+      </div>
+      <div class="chat-input-bar">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." maxlength="500" autocomplete="off">
+        <button class="chat-send" onclick="sendChatMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      </div>
+    </div>
+    </div><!-- /chatWrap -->
+  </div>
+</div>
+
+<!-- ============ DIAGRAM MODAL ============ -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head"><h3 id="modalTitle">Diagram</h3><button class="modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 StudyHub · <b>Developed by Ansh Yadav</b></span><br>
+      <span>Made with <span class="heart">♥</span> for Class 10 learners</span>
+    </div>
+  </div>
+</footer>
+
+<!-- SUPABASE + APP JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js" defer></script>
+
+<!-- ADSTERRA SOCIAL BAR (global — loads once per page) -->
+<script src="https://pl31013049.profitableratecpmnetwork.com/0a/57/53/0a5753f183e9420550b5edf688615c3e.js"></script>
+</body>
+</html>
