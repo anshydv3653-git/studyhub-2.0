@@ -114,7 +114,35 @@ async function loadChapters({subjectId, subjectName, className, classId}) {
     if (!data || !data.length) { list.innerHTML = '<div class="empty"><div class="em-icon">📭</div><p>No chapters found</p></div>'; return; }
     list.innerHTML = data.map((ch, i) => `<div class="chapter-item" onclick="navigate('detail',{chapterId:${ch.id},chapterName:\`${ch.name.replace(/`/g,'\\`')}\`,subjectName:'${esc(subjectName)}',subjectId:${subjectId},className:'${esc(className)}',classId:${classId}})"><span class="ci-num">${i+1}</span><span class="ci-name">${ch.name}</span><span class="ci-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>`).join('');
     initTilt();
+    // Load free lectures for this subject
+    loadLectures(subjectId);
   } catch(e) { list.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>${e.message}</p></div>`; }
+}
+
+// ===================== FREE LECTURES SIDEBAR =====================
+async function loadLectures(subjectId) {
+  const sidebar = document.getElementById('lecturesSidebar');
+  const list = document.getElementById('lecturesList');
+  if (!sidebar || !list || !sb) return;
+
+  try {
+    const { data, error } = await sb.from('nexttopper_lecture_free').select('*').eq('subject_id', subjectId).order('id');
+    if (error) throw error;
+
+    if (!data || !data.length) {
+      sidebar.style.display = 'none';
+      return;
+    }
+
+    sidebar.style.display = 'block';
+    list.innerHTML = data.map(lec => `<a class="lecture-item" href="${lec.link}" target="_blank" rel="noopener noreferrer">
+      <span class="li-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
+      <span class="li-title">${lec.title || 'Untitled Lecture'}</span>
+      <svg class="li-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+    </a>`).join('');
+  } catch(e) {
+    sidebar.style.display = 'none';
+  }
 }
 
 // ===================== CHAPTER DETAIL =====================
