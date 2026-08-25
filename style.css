@@ -84,6 +84,10 @@ ul{list-style:none}
 .subject-card .sc-arrow svg{width:16px;height:16px;color:var(--rose-700);transition:transform .3s var(--ease)}
 .subject-card:hover .sc-arrow svg{transform:translateX(4px)}
 
+/* External link subject cards (PW, NextToppers) */
+a.subject-card{display:block;text-decoration:none;color:inherit}
+a.subject-card .sc-arrow span::after{content:" ↗";font-size:.7rem;opacity:.6}
+
 .chapter-list-wrap{padding-bottom:80px;flex:1;min-width:0}
 
 /* CHAPTERS LAYOUT (chapters + lectures sidebar) */
