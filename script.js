@@ -88,7 +88,14 @@ async function loadHome() {
     const gradients = ['linear-gradient(135deg,#f43f5e,#e11d48)','linear-gradient(135deg,#8b5cf6,#6d28d9)','linear-gradient(135deg,#0ea5e9,#0284c7)','linear-gradient(135deg,#f59e0b,#d97706)','linear-gradient(135deg,#10b981,#059669)','linear-gradient(135deg,#ec4899,#db2777)','linear-gradient(135deg,#6366f1,#4f46e5)','linear-gradient(135deg,#14b8a6,#0d9488)'];
     const cn = class10.name, ci = class10.id;
 
-    grid.innerHTML = subjects.map((s, i) => {
+    // Filter out specific English and Hindi textbooks (keep only main subjects)
+    const excludedSubjects = ['english first flight', 'english footprint', 'hindi kshitiz', 'hindi kritika', 'first flight', 'footprint', 'kshitiz', 'kritika'];
+    const filteredSubjects = subjects.filter(s => {
+      const name = s.name.toLowerCase();
+      return !excludedSubjects.some(excluded => name.includes(excluded));
+    });
+
+    grid.innerHTML = filteredSubjects.map((s, i) => {
       const icon = icons[s.name.toLowerCase()] || '📘';
       return `<div class="subject-card" onclick="navigate('chapters',{subjectId:${s.id},subjectName:'${esc(s.name)}',className:'${esc(cn)}',classId:${ci}})"><div class="sc-top" style="background:${gradients[i%8]}"><span class="sc-icon">${icon}</span></div><div class="sc-body"><h3>${s.name}</h3><div class="sc-arrow"><span>View Chapters</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></div></div>`;
     }).join('')
