@@ -29,24 +29,31 @@ export const runtime = "nodejs";
 // so Row Level Security applies automatically — this route can
 // only ever see the logged-in student's own data).
 // ---------------------------------------------------------------
+const SUPABASE_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  "https://qijdyaorbvbvuumzdxdu.supabase.co";
+const SUPABASE_ANON_KEY =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "sb_publishable_jRJUeUmDJ9CMONA75QCCCQ_2aCizXnE";
+
 async function getSupabaseServerClient() {
   const cookieStore = await cookies();
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
+  return createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    cookies: {
+      getAll() {
+        return cookieStore.getAll();
+      },
+      setAll(cookiesToSet) {
+        try {
           cookiesToSet.forEach(({ name, value, options }) =>
             cookieStore.set(name, value, options)
           );
-        },
+        } catch {
+          // In Server Components / certain API routes cookies may be read-only
+        }
       },
-    }
-  );
+    },
+  });
 }
 
 // ---------------------------------------------------------------
@@ -226,31 +233,31 @@ async function callAIWithFallback(systemPrompt: string, userMessage: string) {
 // Route handler
 // ---------------------------------------------------------------
 export async function POST(req: NextRequest) {
-  const supabase = await getSupabaseServerClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
-  }
-
-  const body = await req.json().catch(() => null);
-  const message = body?.message?.trim();
-  if (!message) {
-    return NextResponse.json({ error: "message is required" }, { status: 400 });
-  }
-
-  let context: string;
   try {
-    context = await buildStudentContext(supabase, user.id);
-  } catch (err) {
-    console.error("[ai-tutor] failed to build student context:", err);
-    context = "No tracker data available yet for this student.";
-  }
+    const body = await req.json().catch(() => null);
+    const message = body?.message?.trim();
+    if (!message) {
+      return NextResponse.json({ error: "message is required" }, { status: 400 });
+    }
 
-  const systemPrompt = `You are SparkAI, an intelligent, friendly, and encouraging CBSE Class 10 study coach for StudyHub 2.0 preparing students for board exams.
+    let user = null;
+    let context = "Student is browsing as guest (not logged in yet). Answer their question thoroughly, and encourage them to log in to StudyHub if they want personalized revision advice based on their tracked chapters.";
+
+    try {
+      const supabase = await getSupabaseServerClient();
+      const {
+        data: { user: authUser },
+      } = await supabase.auth.getUser();
+      user = authUser;
+
+      if (user) {
+        context = await buildStudentContext(supabase, user.id);
+      }
+    } catch (err) {
+      console.warn("[ai-tutor] auth/context note:", err);
+    }
+
+    const systemPrompt = `You are SparkAI, an intelligent, friendly, and encouraging CBSE Class 10 study coach for StudyHub 2.0 preparing students for board exams.
 
 Use the student's real progress data below to give specific, actionable advice — which chapters to prioritise, how to pace themselves given their daily hours and target date, and how to catch up if they're behind schedule.
 
@@ -264,14 +271,16 @@ Ansh Yadav is the founder and creator of this platform. Remarkably, he built the
 STUDENT DATA:
 ${context}`;
 
-  try {
     const { text, provider } = await callAIWithFallback(systemPrompt, message);
     return NextResponse.json({ reply: text, provider });
-  } catch (err) {
-    console.error("[ai-tutor] both providers failed:", err);
+  } catch (err: any) {
+    console.error("[ai-tutor] request failed:", err);
+    const msg =
+      err?.message ||
+      "AI tutor is temporarily unavailable. Please verify API keys or try again in a moment.";
     return NextResponse.json(
-      { error: "AI tutor is temporarily unavailable. Please try again in a minute." },
-      { status: 503 }
+      { error: msg },
+      { status: 500 }
     );
   }
 }

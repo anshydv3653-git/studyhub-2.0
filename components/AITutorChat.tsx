@@ -177,12 +177,12 @@ export default function AITutorChat() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
       if (!res.ok) {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: data.error || "Something went wrong, please try again." },
+          { role: "assistant", content: data?.error || "SparkAI is thinking... please try sending your message again in a moment." },
         ]);
         return;
       }
