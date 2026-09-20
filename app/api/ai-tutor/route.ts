@@ -153,7 +153,9 @@ ${logsSummary}
 }
 
 // ---------------------------------------------------------------
-// Provider calls
+// Provider calls (Gemini 2.5 Flash + Groq 120B Fallback)
+// Accepts standard names: GEMINI_API_KEY, GROQ_API_KEY
+// as well as common aliases (GOOGLE_API_KEY, NEXT_PUBLIC_..., etc.)
 // ---------------------------------------------------------------
 class ProviderError extends Error {
   status: number;
@@ -163,9 +165,28 @@ class ProviderError extends Error {
   }
 }
 
-async function callGemini(systemPrompt: string, userMessage: string): Promise<string> {
+function getGeminiKey(): string {
+  return (
+    process.env.GEMINI_API_KEY ||
+    process.env.GOOGLE_API_KEY ||
+    process.env.NEXT_PUBLIC_GEMINI_API_KEY ||
+    process.env.GEMINI_KEY ||
+    ""
+  ).trim();
+}
+
+function getGroqKey(): string {
+  return (
+    process.env.GROQ_API_KEY ||
+    process.env.NEXT_PUBLIC_GROQ_API_KEY ||
+    process.env.GROQ_KEY ||
+    ""
+  ).trim();
+}
+
+async function callGemini(apiKey: string, systemPrompt: string, userMessage: string): Promise<string> {
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -181,21 +202,22 @@ async function callGemini(systemPrompt: string, userMessage: string): Promise<st
   );
 
   if (!res.ok) {
-    throw new ProviderError(`Gemini error ${res.status}`, res.status);
+    const errText = await res.text().catch(() => "");
+    throw new ProviderError(`Gemini ${res.status}: ${errText.slice(0, 160)}`, res.status);
   }
 
   const data = await res.json();
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new ProviderError("Gemini returned no text", 502);
+  if (!text) throw new ProviderError("Gemini returned empty text", 502);
   return text;
 }
 
-async function callGroq(systemPrompt: string, userMessage: string): Promise<string> {
+async function callGroq(apiKey: string, systemPrompt: string, userMessage: string): Promise<string> {
   const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
       model: "openai/gpt-oss-120b",
@@ -207,26 +229,50 @@ async function callGroq(systemPrompt: string, userMessage: string): Promise<stri
   });
 
   if (!res.ok) {
-    throw new ProviderError(`Groq error ${res.status}`, res.status);
+    const errText = await res.text().catch(() => "");
+    throw new ProviderError(`Groq ${res.status}: ${errText.slice(0, 160)}`, res.status);
   }
 
   const data = await res.json();
   const text = data?.choices?.[0]?.message?.content;
-  if (!text) throw new ProviderError("Groq returned no text", 502);
+  if (!text) throw new ProviderError("Groq returned empty text", 502);
   return text;
 }
 
-// Tries Gemini first; on ANY failure (quota, rate limit, outage),
-// falls back to Groq automatically. The student just gets an answer.
+// Tries Gemini 2.5 Flash first; if Gemini fails (or key is missing),
+// automatically falls back to Groq. If both fail, explains which key failed.
 async function callAIWithFallback(systemPrompt: string, userMessage: string) {
-  try {
-    const text = await callGemini(systemPrompt, userMessage);
-    return { text, provider: "gemini" as const };
-  } catch (geminiErr) {
-    console.warn("[ai-tutor] Gemini failed, falling back to Groq:", geminiErr);
-    const text = await callGroq(systemPrompt, userMessage);
-    return { text, provider: "groq" as const };
+  const geminiKey = getGeminiKey();
+  const groqKey = getGroqKey();
+
+  let geminiErrLog = "";
+  if (geminiKey) {
+    try {
+      const text = await callGemini(geminiKey, systemPrompt, userMessage);
+      return { text, provider: "gemini" as const };
+    } catch (geminiErr: any) {
+      console.warn("[ai-tutor] Gemini failed, falling back to Groq:", geminiErr);
+      geminiErrLog = geminiErr?.message || String(geminiErr);
+    }
+  } else {
+    geminiErrLog = "GEMINI_API_KEY is not set in Vercel Environment Variables";
   }
+
+  if (groqKey) {
+    try {
+      const text = await callGroq(groqKey, systemPrompt, userMessage);
+      return { text, provider: "groq" as const };
+    } catch (groqErr: any) {
+      console.error("[ai-tutor] Groq fallback also failed:", groqErr);
+      throw new Error(
+        `Both AI providers failed. Gemini: ${geminiErrLog} | Groq: ${groqErr?.message || groqErr}`
+      );
+    }
+  }
+
+  throw new Error(
+    `No active AI key found. Please add GEMINI_API_KEY or GROQ_API_KEY in Vercel Settings -> Environment Variables. (${geminiErrLog})`
+  );
 }
 
 // ---------------------------------------------------------------
