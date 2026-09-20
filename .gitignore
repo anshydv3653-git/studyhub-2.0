@@ -1,0 +1,14 @@
+# dependencies
+/node_modules
+
+# next.js build output
+/.next/
+/out/
+
+# env files — NEVER commit real API keys
+.env*.local
+.env
+
+# misc
+*.tsbuildinfo
+.DS_Store
