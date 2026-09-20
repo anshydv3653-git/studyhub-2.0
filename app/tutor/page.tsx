@@ -4,7 +4,9 @@ import AITutorChat from "../../components/AITutorChat";
 const SITE_URL = "https://studyhub-2-0-five.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Spark AI by Ansh – Personal AI Study Coach & Doubt Solver for CBSE Class 10",
+  title: {
+    absolute: "Spark AI by Ansh – Personal AI Study Coach & Doubt Solver for CBSE Class 10 | StudyHub 2.0",
+  },
   description:
     "Ask doubts and get personalized CBSE Class 10 guidance with Spark AI by Ansh on StudyHub 2.0, synced with your syllabus and tracker.",
   alternates: {
