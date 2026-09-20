@@ -200,8 +200,36 @@ async function loadNotes(chapterId) {
     if (notesRes.error) throw notesRes.error;
     const notes = notesRes.data || [], diagrams = diagRes.data || [];
     if (!notes.length) { panel.innerHTML = '<div class="empty"><div class="em-icon">📝</div><p>No notes available yet</p></div>'; return; }
-    panel.innerHTML = notes.map((n, i) => `<div class="note-card"><div class="note-head" onclick="toggleNote(this,${n.id},${chapterId})"><span class="nh-num">${i+1}</span><span class="nh-title">${n.title || 'Note '+(i+1)}</span><svg class="nh-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="note-body"><div class="note-content">${n.fully_explained_notes || n.content || '<em>No content</em>'}</div>${diagrams.length ? `<div class="note-diagrams"><h4>Diagrams</h4><div class="diag-grid">${diagrams.map(d => `<div class="diag-card" onclick="openDiagram('${esc(d.title)}',\`${(d.svg_code||'').replace(/`/g,'\\`')}\`)">${d.svg_code||''}<p>${d.title||''}</p>${d.is_animated?'<span class="anim-badge">✨ Animated</span>':''}</div>`).join('')}</div></div>` : ''}</div></div>`).join('');
+    panel.innerHTML = notes.map((n, i) => `<div class="note-card"><div class="note-head" onclick="toggleNote(this,${n.id},${chapterId})"><span class="nh-num">${i+1}</span><span class="nh-title">${n.title || 'Note '+(i+1)}</span><button class="nh-download" title="Download PDF" onclick="event.stopPropagation(); downloadNotePDF(this,'${esc(n.title || 'Note '+(i+1))}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg></button><svg class="nh-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="note-body"><div class="note-content">${n.fully_explained_notes || n.content || '<em>No content</em>'}</div>${diagrams.length ? `<div class="note-diagrams"><h4>Diagrams</h4><div class="diag-grid">${diagrams.map(d => `<div class="diag-card" onclick="openDiagram('${esc(d.title)}',\`${(d.svg_code||'').replace(/`/g,'\\`')}\`)">${d.svg_code||''}<p>${d.title||''}</p>${d.is_animated?'<span class="anim-badge">✨ Animated</span>':''}</div>`).join('')}</div></div>` : ''}</div></div>`).join('');
   } catch(e) { panel.innerHTML = `<div class="empty"><div class="em-icon">⚠️</div><p>${e.message}</p></div>`; }
+}
+
+// Download a single note as a PDF, using the note's own rendered HTML content
+function downloadNotePDF(btn, title) {
+  const card = btn.closest('.note-card');
+  const content = card.querySelector('.note-content');
+  if (!content) return;
+  const original = btn.innerHTML;
+  btn.innerHTML = '<span class="nh-download-spinner"></span>';
+  btn.disabled = true;
+  const filename = (title || 'notes').replace(/[^a-z0-9]+/gi, '_').replace(/^_+|_+$/g, '') + '.pdf';
+  const opt = {
+    margin: 10,
+    filename,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+  html2pdf().set(opt).from(content).save().then(() => {
+    btn.innerHTML = original;
+    btn.disabled = false;
+  }).catch((err) => {
+    console.error('PDF download failed', err);
+    btn.innerHTML = original;
+    btn.disabled = false;
+    alert('PDF download failed, please try again.');
+  });
 }
 
 let _openedNotes = new Set();
