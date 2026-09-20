@@ -1,20 +1,25 @@
-# AI Study Tutor — Setup Guide (StudyHub 2.0)
+# SparkAI — Setup & Deployment Guide (StudyHub 2.0)
 
-## What's inside this zip
+SparkAI is your 24/7 CBSE Class 10 AI study coach, fully integrated into StudyHub 2.0.
 
-**Your original site — moved, not modified** (full integration, done 20 Sep 2026):
-- `public/index.html`, `public/script.js`, `public/style.css`, favicons, `site.webmanifest`
-  → your static site now lives in the `public/` folder, so Next.js serves it **at the same
-  root URL it always had**. Content is unchanged, except **one new nav link**:
-  `AI Tutor 🤖` (points to `/tutor`) — that's the button your students will click.
-- `README.md` unchanged.
+## What's inside this update
 
-**New files (the AI feature):**
-| File | What it is |
-|---|---|
-| `app/api/ai-tutor/route.ts` | AI backend — reads the student's real progress from Supabase, asks **Gemini 2.5 Flash** first, auto-falls-back to **Groq (gpt-oss-120b)** if Gemini fails. |
-| `components/AITutorChat.tsx` | Glass chat UI with animated 3D background (Three.js). |
-| `app/layout.tsx`, `app/tutor/page.tsx` | Minimal Next.js pages so the app runs and the tutor opens at **`/tutor`** |
+**Your site with SparkAI Integration (20 Sep 2026):**
+- **Home Page (`public/index.html`)**:
+  - Features a prominent **SparkAI Hero Banner** with a large Gemini-style glowing 4-point star AI logo, feature highlights (Live Tracker Synced, Doubt Solver, Exam Schedules), and a "Chat with SparkAI" call-to-action.
+  - Stylish **`✨ SparkAI` pill button** in the top navigation bar with glowing gradient border.
+- **AI Backend (`app/api/ai-tutor/route.ts`)**:
+  - AI Persona: **SparkAI** — trained for CBSE Class 10 board exam prep.
+  - Primary AI: **Gemini 2.5 Flash** (`gemini-2.5-flash`).
+  - Fallback AI: **Groq 120B** (`openai/gpt-oss-120b`).
+  - Reads student's real progress & chapter completion from Supabase cookies.
+- **SparkAI Chat UI (`components/AITutorChat.tsx`)**:
+  - Full-screen glassmorphic interface with interactive 3D particle background (Three.js).
+  - Branded SparkAI header with logo and "← Home" navigation.
+- **Next.js Integration (`next.config.mjs`, `vercel.json`)**:
+  - Root `/` serves your main StudyHub website.
+  - `/tutor` serves SparkAI chat.
+  - Same domain ensures student login cookies work seamlessly.
 | `package.json`, `tsconfig.json`, `next.config.mjs`, `.gitignore` | Standard Next.js project files |
 | `.env.local.example` | Env-var template (Supabase values already filled in — they're the same public values from your `script.js`) |
 | `supabase/ai-tutor-rls-check.sql` | Optional SQL — RLS policies for the 4 AI tables, only needed if you didn't set them up yet |

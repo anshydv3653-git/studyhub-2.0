@@ -85,7 +85,11 @@
       <a onclick="navigate('home')" class="active">Home</a>
       <a onclick="navigate('dashboard')">My Account</a>
       <a onclick="navigate('chat')">Community Chat</a>
-      <a href="/tutor" title="Chat with AI Study Tutor — personal advice based on your progress">AI Tutor 🤖</a>
+      <a href="/tutor" class="nav-sparkai-btn" title="Open SparkAI — CBSE Class 10 AI Tutor">
+        <svg class="spark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+        <span>SparkAI</span>
+        <span class="sparkai-pill-badge">AI</span>
+      </a>
     </nav>
     <div class="user-menu" id="userMenu" style="display:none">
       <div class="user-avatar" id="userAvatar">A</div>
@@ -103,6 +107,79 @@
       <h1>Learn Smarter.<br>Understand Better. <span class="hl">Score Higher.</span></h1>
       <p>Complete Class 10 study companion — Notes, Diagrams, Practice, PYQs and NCERT solutions, all in one place.</p>
     </div>
+
+    <!-- ============ SPARKAI HERO FEATURE BANNER ============ -->
+    <section class="sparkai-hero-banner">
+      <div class="sparkai-card">
+        <div class="sparkai-badge">
+          <svg class="spark-icon-spin" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/>
+          </svg>
+          <span>Powered by Gemini 2.5 Flash</span>
+        </div>
+        
+        <div class="sparkai-content-grid">
+          <div class="sparkai-logo-col">
+            <div class="sparkai-big-logo">
+              <div class="sparkai-logo-glow"></div>
+              <!-- Gemini-style glowing 4-point AI sparkle star -->
+              <svg viewBox="0 0 100 100" class="sparkai-star-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="sparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#9333ea"/>
+                    <stop offset="45%" stop-color="#3b82f6"/>
+                    <stop offset="80%" stop-color="#06b6d4"/>
+                    <stop offset="100%" stop-color="#ec4899"/>
+                  </linearGradient>
+                  <linearGradient id="sparkGradSmall" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#f43f5e"/>
+                    <stop offset="100%" stop-color="#8b5cf6"/>
+                  </linearGradient>
+                </defs>
+                <path d="M50 4 C50 28 28 50 4 50 C28 50 50 72 50 96 C50 72 72 50 96 50 C72 50 50 28 50 4 Z" fill="url(#sparkGrad)"/>
+                <circle cx="50" cy="50" r="10" fill="#ffffff" opacity="0.85"/>
+                <path d="M78 18 C78 24 74 28 68 28 C74 28 78 32 78 38 C78 32 82 28 88 28 C82 28 78 24 78 18 Z" fill="url(#sparkGradSmall)"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="sparkai-info-col">
+            <div class="sparkai-brand-title">
+              <span class="sparkai-title-grad">SparkAI</span>
+              <span class="sparkai-tag">Personal Study Coach</span>
+            </div>
+            <h2>Your CBSE Class 10 Personal AI Tutor</h2>
+            <p>Trained to mentor you for board exams. SparkAI connects directly with your StudyHub tracker — it analyzes your chapter completion, solves doubts step-by-step, recommends what to revise next, and creates personalized study plans.</p>
+            
+            <div class="sparkai-features-row">
+              <div class="sparkai-feature-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                Live Tracker Synced
+              </div>
+              <div class="sparkai-feature-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Step-by-Step Solutions
+              </div>
+              <div class="sparkai-feature-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Board Exam Guidance
+              </div>
+            </div>
+
+            <div class="sparkai-actions">
+              <a href="/tutor" class="sparkai-launch-btn">
+                <span>Chat with SparkAI</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+              </a>
+              <span class="sparkai-sub-note">Free for all StudyHub students • English & Hinglish</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="section-head center" style="margin-top:40px">
       <span class="eyebrow">Class 10</span>
       <h2>Choose a subject</h2>

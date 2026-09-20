@@ -147,7 +147,7 @@ export default function AITutorChat() {
     {
       role: "assistant",
       content:
-        "Hi! I can see your study progress. Ask me what to study next, get help with a topic, or ask for schedule advice — in whichever language you're comfortable with.",
+        "Hi! I'm SparkAI, your personal CBSE Class 10 AI study coach. I'm connected to your StudyHub tracker, so I know your chapters and study goals. Ask me any doubt, get step-by-step NCERT solutions, or ask what to study next — in English or Hinglish!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -217,11 +217,29 @@ export default function AITutorChat() {
       <div style={styles.panel}>
         <div style={styles.panelGlow} />
         <div style={styles.header}>
-          <div style={styles.headerDot} />
-          <div>
-            <div style={styles.headerTitle}>AI Study Tutor</div>
-            <div style={styles.headerSub}>Live with your tracker data</div>
+          <div style={styles.headerLogoWrap}>
+            <svg viewBox="0 0 100 100" style={styles.headerSparkSvg} fill="none">
+              <defs>
+                <linearGradient id="headerSparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#c084fc" />
+                  <stop offset="50%" stopColor="#60a5fa" />
+                  <stop offset="100%" stopColor="#22d3ee" />
+                </linearGradient>
+              </defs>
+              <path d="M50 4 C50 28 28 50 4 50 C28 50 50 72 50 96 C50 72 72 50 96 50 C72 50 50 28 50 4 Z" fill="url(#headerSparkGrad)" />
+              <circle cx="50" cy="50" r="10" fill="#ffffff" opacity="0.9" />
+            </svg>
           </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={styles.headerTitle}>SparkAI</span>
+              <span style={styles.headerBadge}>CBSE 10</span>
+            </div>
+            <div style={styles.headerSub}>Live with your StudyHub tracker • Gemini 2.5 Flash</div>
+          </div>
+          <a href="/" style={styles.backHomeBtn} title="Return to StudyHub Home">
+            ← Home
+          </a>
         </div>
 
         <div style={styles.messages}>
@@ -242,7 +260,7 @@ export default function AITutorChat() {
                 }}
               >
                 {m.content}
-                {m.provider && <span style={styles.providerTag}>{m.provider}</span>}
+                {m.provider && <span style={styles.providerTag}>✨ SparkAI • {m.provider}</span>}
               </div>
             </div>
           ))}
@@ -370,30 +388,57 @@ const styles: Record<string, React.CSSProperties> = {
     position: "relative",
     display: "flex",
     alignItems: "center",
-    gap: "12px",
-    padding: "18px 20px",
+    gap: "14px",
+    padding: "16px 20px",
     borderBottom: "1px solid rgba(255,255,255,0.08)",
   },
-  headerDot: {
-    width: "10px",
-    height: "10px",
-    borderRadius: "50%",
-    background: "linear-gradient(135deg, #4fd1c5, #6fa8d3)",
-    boxShadow: "0 0 12px rgba(79,209,197,0.8)",
-    animation: "borderGlow 2.4s ease-in-out infinite",
+  headerLogoWrap: {
+    width: "36px",
+    height: "36px",
+    display: "grid",
+    placeItems: "center",
+    filter: "drop-shadow(0 0 10px rgba(168,85,247,0.7))",
     flexShrink: 0,
   },
+  headerSparkSvg: {
+    width: "100%",
+    height: "100%",
+  },
   headerTitle: {
-    fontFamily: "'Fraunces', Georgia, serif",
-    fontWeight: 600,
-    fontSize: "18px",
-    color: "#f4f2fa",
+    fontFamily: "'Plus Jakarta Sans', -apple-system, sans-serif",
+    fontWeight: 800,
+    fontSize: "19px",
+    color: "#ffffff",
+    letterSpacing: "-0.02em",
     lineHeight: 1.2,
   },
+  headerBadge: {
+    fontSize: "10px",
+    fontWeight: 800,
+    letterSpacing: "0.06em",
+    color: "#38bdf8",
+    background: "rgba(56,189,248,0.15)",
+    border: "1px solid rgba(56,189,248,0.3)",
+    padding: "2px 7px",
+    borderRadius: "999px",
+    textTransform: "uppercase" as const,
+  },
   headerSub: {
-    fontSize: "12px",
-    color: "#9aa2b7",
+    fontSize: "11.5px",
+    color: "#94a3b8",
     marginTop: "2px",
+  },
+  backHomeBtn: {
+    fontSize: "12px",
+    fontWeight: 700,
+    color: "#cbd5e1",
+    background: "rgba(255,255,255,0.06)",
+    border: "1px solid rgba(255,255,255,0.12)",
+    padding: "6px 12px",
+    borderRadius: "999px",
+    textDecoration: "none",
+    transition: "all 0.2s ease",
+    flexShrink: 0,
   },
   helpFooter: {
     display: "block",

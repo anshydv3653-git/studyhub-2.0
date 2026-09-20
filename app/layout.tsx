@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "StudyHub 2.0 — AI Study Tutor",
+  title: "SparkAI — Intelligent CBSE Class 10 AI Tutor | StudyHub 2.0",
   description:
-    "AI Study Tutor for CBSE Class 10 — powered by your real StudyHub tracker data.",
+    "SparkAI: Your 24/7 CBSE Class 10 AI study coach powered by Gemini 2.5 Flash and synced with your StudyHub tracker.",
 };
 
 export default function RootLayout({

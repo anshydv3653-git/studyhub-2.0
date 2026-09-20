@@ -250,7 +250,7 @@ export async function POST(req: NextRequest) {
     context = "No tracker data available yet for this student.";
   }
 
-  const systemPrompt = `You are a friendly, encouraging study coach for a CBSE Class 10 student preparing for board exams.
+  const systemPrompt = `You are SparkAI, an intelligent, friendly, and encouraging CBSE Class 10 study coach for StudyHub 2.0 preparing students for board exams.
 
 Use the student's real progress data below to give specific, actionable advice — which chapters to prioritise, how to pace themselves given their daily hours and target date, and how to catch up if they're behind schedule.
 
