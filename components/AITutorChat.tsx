@@ -365,7 +365,7 @@ export default function AITutorChat() {
       id: "initial-welcome",
       role: "assistant",
       content:
-        "Hi! I'm **SparkAI**, your personal CBSE Class 10 study coach, built & powered by **Ansh**.\n\nI'm directly synced with your StudyHub tracker, so I know your chapters and study goals. Ask me any doubt, get step-by-step NCERT solutions, or ask what to study next — in English or Hinglish!",
+        "Hi! I'm **Spark AI by Ansh**, your personal CBSE Class 10 study coach on **StudyHub 2.0**.\n\nI'm directly synced with your chapter progress tracker, so I know your syllabus pacing and board exam goals. Ask me any doubt, get step-by-step NCERT solutions, or ask what to study next — in English or Hinglish!",
       provider: "ansh",
       timestamp: "Just now",
     },
@@ -1234,14 +1234,14 @@ export default function AITutorChat() {
         <div className="glow-orb-cyan" />
       </div>
 
-      {/* Minimalist Top Header: SparkAI + Powered by Ansh */}
+      {/* Minimalist Top Header: Spark AI by Ansh */}
       <header className="spark-header">
         <div className="header-brand-group">
           <SparkLogo size={28} />
-          <span className="brand-title">SparkAI</span>
+          <span className="brand-title">Spark AI by Ansh</span>
           <div className="powered-by-ansh-pill" title="Created by Ansh Yadav for CBSE Class 10">
             <span className="power-spark-icon">⚡</span>
-            <span>Powered by Ansh</span>
+            <span>CBSE Class 10</span>
           </div>
         </div>
 
@@ -1257,11 +1257,11 @@ export default function AITutorChat() {
             </svg>
             <span>New Chat</span>
           </button>
-          <a href="/" className="nav-action-btn" title="Back to StudyHub main site">
+          <a href="/" className="nav-action-btn" title="Back to StudyHub 2.0 home">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
               <path d="m15 18-6-6 6-6" />
             </svg>
-            <span>Home</span>
+            <span>StudyHub 2.0</span>
           </a>
         </div>
       </header>
@@ -1285,7 +1285,7 @@ export default function AITutorChat() {
                     <div className="ai-msg-actions">
                       <span className="msg-provider-tag">
                         <span>⚡</span>
-                        <span>SparkAI • Powered by Ansh</span>
+                        <span>Spark AI by Ansh • StudyHub 2.0</span>
                       </span>
                       <button
                         type="button"
@@ -1344,7 +1344,7 @@ export default function AITutorChat() {
               </div>
               <div className="thinking-bubble">
                 <div className="thinking-electric-wave" />
-                <span>SparkAI is thinking & analyzing tracker...</span>
+                <span>Spark AI by Ansh is thinking...</span>
               </div>
             </div>
           )}
@@ -1367,7 +1367,7 @@ export default function AITutorChat() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask SparkAI anything (Science doubts, Math steps, exam tips)..."
+            placeholder="Ask Spark AI by Ansh anything (Science doubts, Math steps, exam tips)..."
             rows={1}
             className="spark-textarea"
           />
@@ -1391,7 +1391,7 @@ export default function AITutorChat() {
         </form>
 
         <p className="input-sub-disclaimer">
-          SparkAI is calibrated for CBSE Class 10 • Built with care by Ansh
+          Spark AI by Ansh is calibrated for CBSE Class 10 • StudyHub 2.0
         </p>
       </footer>
     </div>

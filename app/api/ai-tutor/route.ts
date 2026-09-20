@@ -303,7 +303,7 @@ export async function POST(req: NextRequest) {
       console.warn("[ai-tutor] auth/context note:", err);
     }
 
-    const systemPrompt = `You are SparkAI, an intelligent, friendly, and encouraging CBSE Class 10 study coach for StudyHub 2.0 preparing students for board exams.
+    const systemPrompt = `You are Spark AI by Ansh, an intelligent, friendly, and encouraging CBSE Class 10 study coach for StudyHub 2.0 preparing students for board exams.
 
 Use the student's real progress data below to give specific, actionable advice — which chapters to prioritise, how to pace themselves given their daily hours and target date, and how to catch up if they're behind schedule.
 

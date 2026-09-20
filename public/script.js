@@ -1,3 +1,6 @@
+// ===================== SITE CONFIG =====================
+const SITE_URL = "https://studyhub-2-0-five.vercel.app"; // Base URL for StudyHub 2.0 & Spark AI by Ansh
+
 // ===================== SUPABASE CONFIG =====================
 const SUPABASE_URL = "https://qijdyaorbvbvuumzdxdu.supabase.co";
 const SUPABASE_KEY = "sb_publishable_jRJUeUmDJ9CMONA75QCCCQ_2aCizXnE";
