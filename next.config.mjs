@@ -2,11 +2,15 @@
 // public/index.html at the root URL "/" so the main site keeps its
 // original address (no /index.html suffix, no redirects).
 //
-// /spark-ai points to the /tutor AI route for dedicated SEO entry point.
+// /spark-ai is a dedicated public informational SEO page at app/spark-ai/page.tsx
+// which links to /tutor for the full-screen interactive chat.
+//
+// /tracker and /dashboard route directly to the study tracker in index.html.
 async function rewrites() {
   return [
     { source: "/", destination: "/index.html" },
-    { source: "/spark-ai", destination: "/tutor" },
+    { source: "/tracker", destination: "/index.html" },
+    { source: "/dashboard", destination: "/index.html" },
   ];
 }
 

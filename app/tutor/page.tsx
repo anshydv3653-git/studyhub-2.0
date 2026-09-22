@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   description:
     "Ask doubts and get personalized CBSE Class 10 guidance with Spark AI by Ansh on StudyHub 2.0, synced with your syllabus and tracker.",
   alternates: {
-    canonical: `${SITE_URL}/spark-ai`,
+    canonical: `${SITE_URL}/tutor`,
   },
   openGraph: {
     title: "Spark AI by Ansh – Personal AI Study Coach & Doubt Solver for CBSE Class 10 | StudyHub 2.0",
     description:
       "Ask doubts and get personalized CBSE Class 10 guidance with Spark AI by Ansh on StudyHub 2.0, synced with your syllabus and tracker.",
-    url: `${SITE_URL}/spark-ai`,
+    url: `${SITE_URL}/tutor`,
     siteName: "StudyHub 2.0",
     locale: "en_IN",
     type: "website",

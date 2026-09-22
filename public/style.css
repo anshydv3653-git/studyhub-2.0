@@ -84,7 +84,7 @@ ul{list-style:none}
 .subject-card .sc-arrow svg{width:16px;height:16px;color:var(--rose-700);transition:transform .3s var(--ease)}
 .subject-card:hover .sc-arrow svg{transform:translateX(4px)}
 
-/* External link subject cards (PW, NextToppers) */
+/* External link subject cards (PW, NextToppers, KGS Free Batches) */
 a.subject-card{display:block;text-decoration:none;color:inherit}
 a.subject-card .sc-arrow span::after{content:" ↗";font-size:.7rem;opacity:.6}
 
@@ -475,6 +475,27 @@ h1,h2,h3,p,span,.btn,.eyebrow,.crumbs,.cs-badge{overflow-wrap:break-word;word-wr
 .auth-switch a{color:var(--rose-600);font-weight:700;cursor:pointer;transition:color .2s}
 .auth-switch a:hover{color:var(--rose-800)}
 
+/* Auth close button */
+.auth-close-btn{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:transparent;border:none;cursor:pointer;display:grid;place-items:center;color:var(--muted);transition:background .2s,color .2s;z-index:2}
+.auth-close-btn:hover{background:var(--rose-50);color:var(--rose-700)}
+
+/* Password wrapper and toggle button */
+.auth-password-wrap{position:relative;width:100%}
+.auth-password-wrap .auth-input{padding-right:44px}
+.auth-pwd-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);padding:6px;display:flex;align-items:center;justify-content:center;transition:color .2s;z-index:2}
+.auth-pwd-toggle:hover{color:var(--ink)}
+
+/* Forgot password link */
+.auth-forgot-link{font-size:.82rem;color:var(--rose-600);font-weight:600;text-decoration:none;cursor:pointer;transition:color .2s}
+.auth-forgot-link:hover{color:var(--rose-800);text-decoration:underline}
+
+/* In-app browser notice */
+.auth-inapp-notice{background:#fffbeb;border:1px solid #fcd34d;color:#92400e;padding:10px 14px;border-radius:var(--r-sm);font-size:.82rem;line-height:1.45;margin-bottom:14px;text-align:left}
+
+/* Nav login button */
+.nav-login-btn{display:inline-flex;align-items:center;padding:7px 16px;border-radius:999px;background:var(--grad-rose);color:#fff;font-size:.84rem;font-weight:700;border:none;cursor:pointer;box-shadow:0 6px 16px -6px rgba(184,18,58,.4);transition:transform .2s,box-shadow .2s;font-family:var(--font)}
+.nav-login-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -6px rgba(184,18,58,.5)}
+
 /* Google Sign-In Button */
 .auth-google{width:100%;padding:12px 20px;border:1.5px solid var(--line);border-radius:var(--r-sm);background:#fff;font-size:.92rem;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .25s var(--ease);font-family:var(--font)}
 .auth-google:hover{border-color:rgba(225,29,72,.35);box-shadow:var(--shadow-sm);transform:translateY(-2px)}
@@ -689,4 +710,111 @@ h1,h2,h3,p,span,.btn,.eyebrow,.crumbs,.cs-badge{overflow-wrap:break-word;word-wr
 @media(max-width:768px){
   .faq-grid{grid-template-columns:1fr;gap:14px}
   .faq-item{padding:18px 20px}
+}
+
+/* =================================================================
+   PERSONAL STUDY TRACKER (STUDYHUB 2.0)
+   ================================================================= */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{padding:12px 20px;border-radius:12px;font-size:.88rem;font-weight:700;color:#fff;background:rgba(20,20,25,.95);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 30px rgba(0,0,0,.4);pointer-events:auto;animation:toastIn .25s var(--ease);display:flex;align-items:center;gap:10px}
+.toast.success{border-left:4px solid #10b981}
+.toast.error{border-left:4px solid #f43f5e}
+.toast.info{border-left:4px solid #38bdf8}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Tracker Navigation Tabs */
+.tracker-nav-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:14px}
+.tracker-tab-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;font-size:.9rem;font-weight:700;color:var(--ink-2);background:var(--rose-50);border:1px solid var(--line);cursor:pointer;transition:all .2s var(--ease)}
+.tracker-tab-btn:hover{color:var(--rose-700);background:#fff;border-color:rgba(225,29,72,.3);transform:translateY(-1px)}
+.tracker-tab-btn.active{color:#fff;background:var(--grad-rose);border-color:transparent;box-shadow:0 6px 16px -6px rgba(184,18,58,.5)}
+.tracker-tab-badge{font-size:.7rem;padding:2px 7px;border-radius:999px;background:rgba(255,255,255,.25);color:#fff}
+.tracker-tab-btn:not(.active) .tracker-tab-badge{background:var(--rose-200);color:var(--rose-800)}
+
+/* Top Metric Cards */
+.tracker-metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-bottom:28px}
+.tracker-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:22px;box-shadow:var(--shadow-sm);transition:all .25s var(--ease);position:relative;overflow:hidden}
+.tracker-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.tracker-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.tracker-card-title{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.tracker-card-icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem}
+
+/* Goal Ring SVG */
+.goal-ring-container{display:flex;align-items:center;gap:20px}
+.goal-ring-svg{width:84px;height:84px;flex-shrink:0;transform:rotate(-90deg)}
+.goal-ring-bg{fill:none;stroke:var(--rose-100);stroke-width:8}
+.goal-ring-fill{fill:none;stroke:var(--rose-500);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .5s var(--ease)}
+.goal-ring-text-group{flex:1;min-width:0}
+.goal-ring-primary{font-size:1.6rem;font-weight:900;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
+.goal-ring-sub{font-size:.82rem;color:var(--muted);margin-top:4px}
+.goal-reached-tag{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:800;color:#10b981;background:#ecfdf5;border:1px solid rgba(16,185,129,.3);padding:3px 8px;border-radius:999px;margin-top:6px}
+
+/* Action Bar */
+.tracker-action-bar{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.tracker-btn-primary{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:999px;font-size:.92rem;font-weight:800;color:#fff;background:var(--grad-rose);border:none;cursor:pointer;box-shadow:0 8px 20px -6px rgba(184,18,58,.5);transition:all .2s var(--ease)}
+.tracker-btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px -6px rgba(184,18,58,.65)}
+.tracker-btn-glass{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;font-size:.92rem;font-weight:700;color:var(--ink);background:#fff;border:1px solid var(--line);cursor:pointer;box-shadow:var(--shadow-sm);transition:all .2s var(--ease)}
+.tracker-btn-glass:hover{background:var(--rose-50);border-color:rgba(225,29,72,.3);transform:translateY(-1px)}
+
+/* Task Lists & Checkboxes */
+.tracker-section{margin-bottom:32px}
+.tracker-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.tracker-section-title{font-size:1.12rem;font-weight:800;letter-spacing:-.015em;color:var(--ink);display:flex;align-items:center;gap:8px}
+.tracker-tasks-list{display:flex;flex-direction:column;gap:8px}
+.tracker-task-item{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow-sm);transition:all .2s var(--ease)}
+.tracker-task-item:hover{border-color:rgba(225,29,72,.28);transform:translateX(2px)}
+.tracker-task-item.is-done{opacity:.65;background:rgba(250,250,250,.7)}
+.tracker-task-item.is-done .task-title-text{text-decoration:line-through;color:var(--muted)}
+.tracker-checkbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--rose-400);background:#fff;cursor:pointer;display:grid;place-items:center;flex-shrink:0;transition:all .15s var(--ease)}
+.tracker-checkbox:hover{border-color:var(--rose-600);background:var(--rose-50)}
+.tracker-checkbox.checked{background:var(--rose-500);border-color:var(--rose-500);color:#fff}
+.task-title-text{flex:1;min-width:0;font-size:.93rem;font-weight:700;color:var(--ink);word-break:break-word}
+.task-subject-tag{font-size:.72rem;font-weight:800;padding:3px 9px;border-radius:999px;color:#fff;flex-shrink:0}
+.task-meta-tag{font-size:.74rem;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:4px;flex-shrink:0}
+.task-meta-tag.overdue{color:#f43f5e;font-weight:800;background:#fff1f2;padding:2px 8px;border-radius:999px}
+.task-actions-group{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.task-icon-btn{width:28px;height:28px;border-radius:8px;border:none;background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:all .15s}
+.task-icon-btn:hover{color:var(--ink);background:var(--rose-50)}
+.task-icon-btn.delete:hover{color:#f43f5e;background:#fee2e2}
+
+/* Subject Cards Grid */
+.tracker-subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.subject-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;box-shadow:var(--shadow-sm);cursor:pointer;transition:all .25s var(--ease);position:relative;border-top-width:4px}
+.subject-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.subject-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.subject-card-title{font-size:1.15rem;font-weight:800;color:var(--ink);letter-spacing:-.015em}
+.subject-progress-wrap{margin-bottom:12px}
+.subject-progress-bar{height:6px;background:var(--rose-100);border-radius:999px;overflow:hidden;margin-top:6px}
+.subject-progress-fill{height:100%;border-radius:999px;transition:width .4s var(--ease)}
+.subject-card-footer{display:flex;align-items:center;justify-content:space-between;font-size:.82rem;font-weight:700;color:var(--muted)}
+
+/* Progress Chart Bar */
+.tracker-chart-container{display:flex;align-items:flex-end;gap:12px;height:180px;padding:20px 10px 10px;margin-top:10px}
+.chart-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
+.chart-bar-pill{width:100%;max-width:38px;background:var(--grad-rose);border-radius:8px 8px 3px 3px;transition:height .4s var(--ease);min-height:4px}
+.chart-bar-value{font-size:.74rem;font-weight:800;color:var(--ink-2)}
+.chart-bar-label{font-size:.76rem;font-weight:700;color:var(--muted)}
+
+/* Modals */
+.tracker-modal-overlay{position:fixed;inset:0;background:rgba(20,15,22,.65);backdrop-filter:blur(10px);z-index:200;display:grid;place-items:center;padding:16px;animation:modalFade .2s var(--ease)}
+.tracker-modal-card{width:min(520px,100%);background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(22px,4vw,32px);box-shadow:var(--shadow-lg);position:relative;max-height:90vh;overflow-y:auto}
+.tracker-modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.tracker-modal-title{font-size:1.25rem;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.tracker-modal-close{width:34px;height:34px;border-radius:10px;background:var(--rose-50);border:none;cursor:pointer;display:grid;place-items:center;color:var(--ink-2);transition:all .15s}
+.tracker-modal-close:hover{background:var(--rose-200);color:var(--rose-900)}
+.tracker-form-group{margin-bottom:18px}
+.tracker-form-label{display:block;font-size:.82rem;font-weight:700;color:var(--ink-2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.tracker-form-input,.tracker-form-select{width:100%;padding:12px 14px;border-radius:var(--r-sm);border:1px solid var(--line);font-family:inherit;font-size:.95rem;color:var(--ink);background:#fff;outline:none;transition:border-color .2s}
+.tracker-form-input:focus,.tracker-form-select:focus{border-color:var(--rose-500);box-shadow:0 0 0 3px rgba(225,29,72,.1)}
+.tracker-chips-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tracker-chip{padding:6px 14px;border-radius:999px;font-size:.82rem;font-weight:700;background:var(--rose-50);border:1px solid var(--line);color:var(--ink-2);cursor:pointer;transition:all .15s}
+.tracker-chip:hover,.tracker-chip.active{background:var(--rose-500);color:#fff;border-color:var(--rose-500)}
+
+@keyframes modalFade{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+
+/* Responsive */
+@media(max-width:768px){
+  .tracker-metrics-grid{grid-template-columns:1fr}
+  .tracker-subjects-grid{grid-template-columns:1fr}
+  .tracker-chart-container{gap:6px}
+  .tracker-tab-btn{padding:8px 14px;font-size:.84rem}
 }

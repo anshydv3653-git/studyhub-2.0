@@ -131,48 +131,105 @@
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-bg"></div>
   <div class="auth-card">
+    <button type="button" class="auth-close-btn" onclick="StudyHubAuth.hideAuthModal()" aria-label="Close dialog">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
     <div class="auth-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
     <h2 class="auth-title" id="authTitle">Welcome to StudyHub 2.0</h2>
     <p class="auth-subtitle" id="authSubtitle">Best of luck — score 100 out of 100 in your Boards 2027! 🎯</p>
 
+    <!-- IN-APP BROWSER HINT -->
+    <div class="auth-inapp-notice" id="authInAppNotice" style="display:none">
+      <span>⚠️ <b>In-app browser detected</b> (Instagram / WhatsApp). If Google Sign-In is blocked, tap <b>⋮</b> or <b>⋯</b> and choose <b>Open in Chrome / Safari</b>.</span>
+    </div>
+
     <!-- LOGIN FORM -->
-    <div class="auth-form" id="authLoginForm">
-      <button class="auth-google" onclick="loginWithGoogle()">
+    <form class="auth-form" id="authLoginForm" onsubmit="event.preventDefault(); handleLoginSubmit();">
+      <button type="button" class="auth-google" id="googleLoginBtn" onclick="handleGoogleAuth()">
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Sign in with Google
       </button>
       <div class="auth-divider"><span>or</span></div>
-      <input type="email" class="auth-input" id="loginEmail" placeholder="Email address" autocomplete="email">
-      <input type="password" class="auth-input" id="loginPassword" placeholder="Password" autocomplete="current-password">
-      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doLogin()">Sign In <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-      <div class="auth-switch">Don't have an account? <a onclick="switchAuthMode('signup')">Sign up free</a></div>
-    </div>
+      <input type="email" class="auth-input" id="loginEmail" placeholder="Email address" autocomplete="email" required>
+      <div class="auth-password-wrap">
+        <input type="password" class="auth-input" id="loginPassword" placeholder="Password" autocomplete="current-password" required>
+        <button type="button" class="auth-pwd-toggle" onclick="StudyHubAuth.togglePasswordVisibility('loginPassword', this)" title="Show/Hide Password" aria-label="Toggle password visibility">
+          <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:-3px">
+        <a class="auth-forgot-link" onclick="StudyHubAuth.switchMode('forgot')">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn btn-primary" id="loginSubmitBtn" style="width:100%;justify-content:center">
+        <span>Sign In</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="auth-switch">Don't have an account? <a onclick="StudyHubAuth.switchMode('signup')">Sign up free</a></div>
+    </form>
 
     <!-- SIGNUP FORM -->
-    <div class="auth-form" id="authSignupForm" style="display:none">
-      <button class="auth-google" onclick="loginWithGoogle()">
+    <form class="auth-form" id="authSignupForm" style="display:none" onsubmit="event.preventDefault(); handleSignupSubmit();">
+      <button type="button" class="auth-google" id="googleSignupBtn" onclick="handleGoogleAuth()">
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Sign up with Google
       </button>
       <div class="auth-divider"><span>or</span></div>
-      <input type="email" class="auth-input" id="signupEmail" placeholder="Email address" autocomplete="email">
-      <input type="password" class="auth-input" id="signupPassword" placeholder="Password (min 6 characters)" autocomplete="new-password">
-      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doSignup()">Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-      <div class="auth-switch">Already have an account? <a onclick="switchAuthMode('login')">Sign in</a></div>
-    </div>
+      <input type="email" class="auth-input" id="signupEmail" placeholder="Email address" autocomplete="email" required>
+      <div class="auth-password-wrap">
+        <input type="password" class="auth-input" id="signupPassword" placeholder="Password (min 8 characters)" autocomplete="new-password" minlength="8" required>
+        <button type="button" class="auth-pwd-toggle" onclick="StudyHubAuth.togglePasswordVisibility('signupPassword', this)" title="Show/Hide Password" aria-label="Toggle password visibility">
+          <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+      </div>
+      <button type="submit" class="btn btn-primary" id="signupSubmitBtn" style="width:100%;justify-content:center">
+        <span>Create Account</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="auth-switch">Already have an account? <a onclick="StudyHubAuth.switchMode('login')">Sign in</a></div>
+    </form>
+
+    <!-- FORGOT PASSWORD FORM -->
+    <form class="auth-form" id="authForgotForm" style="display:none" onsubmit="event.preventDefault(); handleForgotSubmit();">
+      <input type="email" class="auth-input" id="forgotEmail" placeholder="Registered email address" autocomplete="email" required>
+      <button type="submit" class="btn btn-primary" id="forgotSubmitBtn" style="width:100%;justify-content:center">
+        <span>Send Reset Link</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="auth-switch">Remember your password? <a onclick="StudyHubAuth.switchMode('login')">Back to Sign In</a></div>
+    </form>
+
+    <!-- RESET PASSWORD FORM (FOR PASSWORD_RECOVERY) -->
+    <form class="auth-form" id="authResetForm" style="display:none" onsubmit="event.preventDefault(); handleResetSubmit();">
+      <div class="auth-password-wrap">
+        <input type="password" class="auth-input" id="resetPassword" placeholder="New password (min 8 characters)" autocomplete="new-password" minlength="8" required>
+        <button type="button" class="auth-pwd-toggle" onclick="StudyHubAuth.togglePasswordVisibility('resetPassword', this)" title="Show/Hide Password" aria-label="Toggle password visibility">
+          <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+      </div>
+      <button type="submit" class="btn btn-primary" id="resetSubmitBtn" style="width:100%;justify-content:center">
+        <span>Save New Password</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </form>
 
     <!-- ONBOARDING FORM -->
-    <div class="auth-form" id="authOnboardForm" style="display:none">
-      <input type="text" class="auth-input" id="onboardName" placeholder="Your full name" autocomplete="name">
-      <select class="auth-select" id="onboardClass">
+    <form class="auth-form" id="authOnboardForm" style="display:none" onsubmit="event.preventDefault(); handleOnboardSubmit();">
+      <input type="text" class="auth-input" id="onboardName" placeholder="Your full name" autocomplete="name" required>
+      <select class="auth-select" id="onboardClass" required>
         <option value="">Select your class</option>
         <option value="1">Class 9</option>
-        <option value="2">Class 10</option>
+        <option value="2" selected>Class 10</option>
         <option value="3">Class 11</option>
         <option value="4">Class 12</option>
       </select>
-      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doOnboard()">Save & Start Learning <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-    </div>
+      <button type="submit" class="btn btn-primary" id="onboardSubmitBtn" style="width:100%;justify-content:center">
+        <span>Save & Start Learning</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </form>
 
     <div class="auth-msg" id="authMsg"></div>
   </div>
@@ -194,14 +251,18 @@
     <a class="brand" onclick="navigate('home')"><span class="brand-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>Study<em>Hub</em></a>
     <nav class="nav-links" id="navLinks">
       <a onclick="navigate('home')" class="active">Home</a>
-      <a onclick="navigate('dashboard')">My Account</a>
+      <a href="/tracker" onclick="event.preventDefault(); navigate('dashboard');" title="Open Personal Study Tracker"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:-2px;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Study Tracker</a>
       <a onclick="navigate('chat')">Community Chat</a>
       <a href="/spark-ai" class="nav-sparkai-btn" title="Open Spark AI by Ansh — CBSE Class 10 AI Tutor">
         <svg class="spark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
-        <span>Spark AI by Ansh</span>
+        <span>Spark AI</span>
         <span class="sparkai-pill-badge">AI</span>
       </a>
     </nav>
+    <button class="nav-login-btn" id="navLoginBtn" onclick="StudyHubAuth.showAuthModal('login')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:-2px;margin-right:4px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Sign In
+    </button>
     <div class="user-menu" id="userMenu" style="display:none">
       <div class="user-avatar" id="userAvatar">A</div>
       <span class="user-name" id="userName"></span>
@@ -216,7 +277,7 @@
   <div class="container">
     <div class="hero-mini">
       <h1>Learn Smarter.<br>Understand Better. <span class="hl">Score Higher.</span></h1>
-      <p>Welcome to <strong>StudyHub 2.0 CBSE Class 10</strong> — your comprehensive portal for <strong>CBSE Class 10 notes PYQ NCERT solutions free</strong>, interactive diagrams, practice questions, and board exam revision tools.</p>
+      <p>StudyHub 2.0 is a free CBSE Class 10 study platform with chapter-wise notes, diagrams, practice questions, PYQs, NCERT solutions and Spark AI by Ansh. Welcome to <strong>StudyHub 2.0 CBSE Class 10</strong> — your comprehensive portal for <strong>CBSE Class 10 notes PYQ NCERT solutions free</strong>, interactive diagrams, practice questions, and board exam revision tools.</p>
     </div>
 
     <!-- ============ SPARKAI HERO FEATURE BANNER ============ -->
@@ -294,6 +355,51 @@
                 </svg>
               </a>
               <span class="sparkai-sub-note">Free for all StudyHub 2.0 students • English & Hinglish</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PERSONAL STUDY TRACKER SHOWCASE BANNER ============ -->
+    <section class="tracker-showcase-section" id="tracker-showcase" style="margin: 36px 0;">
+      <div style="background: linear-gradient(145deg, #ffffff, #fff5f7); border: 1px solid rgba(225,29,72,0.22); border-radius: var(--r-lg); padding: clamp(20px, 3.5vw, 36px); box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px;">
+          <div style="max-width: 560px;">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--rose-50); border: 1px solid rgba(225,29,72,0.25); border-radius: 999px; padding: 6px 14px; font-size: .82rem; font-weight: 800; color: var(--rose-700); margin-bottom: 14px;">
+              <span>🎯 StudyHub 2.0 Personal Study Tracker</span>
+            </div>
+            <h2 style="font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 900; letter-spacing: -.02em; color: var(--ink); margin-bottom: 12px; line-height: 1.25;">
+              Track Your Daily Study Hours, Custom Subjects & Tasks
+            </h2>
+            <p style="font-size: .98rem; line-height: 1.6; color: var(--ink-2); margin-bottom: 22px;">
+              Each student prepares differently. Set your own daily goal (0.5–16 hours), create custom subjects, log study sessions in Indian Standard Time (IST), tick tasks with instant optimistic updates, and keep your consistency streak burning hot.
+            </p>
+            <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+              <button onclick="navigate('dashboard')" class="tracker-btn-primary" style="padding: 13px 28px; font-size: 1rem;">
+                Open Study Tracker 🚀
+              </button>
+              <span style="font-size: .85rem; font-weight: 700; color: var(--muted);">
+                100% Free • Synced with your account
+              </span>
+            </div>
+          </div>
+
+          <!-- Quick Preview Cards -->
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; flex: 1; min-width: 280px; justify-content: flex-end;">
+            <div class="tracker-card" style="padding: 18px 20px; min-width: 170px; flex: 1; background: #fff;">
+              <div style="font-size: .78rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">Daily Goal Ring</div>
+              <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                <div style="font-size: 1.7rem; font-weight: 900; color: var(--rose-700);">180m</div>
+                <div style="font-size: .76rem; font-weight: 800; color: #10b981; background: #ecfdf5; padding: 3px 8px; border-radius: 999px;">100% Goal</div>
+              </div>
+              <div style="font-size: .76rem; color: var(--muted); margin-top: 6px;">Daily target tracker</div>
+            </div>
+
+            <div class="tracker-card" style="padding: 18px 20px; min-width: 170px; flex: 1; background: #fff;">
+              <div style="font-size: .78rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">Consistency Streak</div>
+              <div style="font-size: 1.7rem; font-weight: 900; color: var(--ink); margin-top: 10px;">🔥 7 Days</div>
+              <div style="font-size: .76rem; color: var(--muted); margin-top: 6px;">Daily streak tracking</div>
             </div>
           </div>
         </div>
@@ -507,8 +613,14 @@
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="container">
+    <div style="display:flex;justify-content:center;gap:20px;margin-bottom:14px;flex-wrap:wrap">
+      <a href="/" style="color:var(--muted);text-decoration:none;font-weight:600;font-size:0.9rem">Home</a>
+      <a href="/spark-ai" style="color:var(--rose-700);text-decoration:none;font-weight:700;font-size:0.9rem">Spark AI</a>
+      <a href="/tutor" style="color:var(--muted);text-decoration:none;font-weight:600;font-size:0.9rem">AI Tutor Chat</a>
+      <a onclick="navigate('dashboard')" style="color:var(--muted);text-decoration:none;font-weight:600;font-size:0.9rem;cursor:pointer">Study Tracker</a>
+    </div>
     <div class="footer-bottom">
-      <span>© 2026 StudyHub · <b>Developed by Ansh Yadav</b></span><br>
+      <span>© 2026 StudyHub 2.0 · <b>Developed by Ansh Yadav</b></span><br>
       <span>Made with <span class="heart">♥</span> for Class 10 learners</span>
     </div>
   </div>
@@ -517,6 +629,7 @@
 <!-- SUPABASE + APP JS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="auth.js" defer></script>
 <script src="script.js" defer></script>
 
 <!-- ADSTERRA SOCIAL BAR (global — loads once per page) -->

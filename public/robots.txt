@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /account
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /chat
+Disallow: /tracker
+
+Sitemap: https://studyhub-2-0-five.vercel.app/sitemap.xml
