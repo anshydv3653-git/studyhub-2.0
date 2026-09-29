@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyHub 2.0 | Ace Your Class 10 Board Prep</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            background: "#09090b",
+            foreground: "#f8fafc",
+            card: "#18181b",
+            border: "#27272a"
+          },
+          animation: {
+            'shine-pulse': 'shine-pulse 6s linear infinite',
+          },
+          keyframes: {
+            'shine-pulse': {
+              '0%': { backgroundPosition: '0% 0%' },
+              '50%': { backgroundPosition: '100% 100%' },
+              '100%': { backgroundPosition: '0% 0%' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .shine-box {
+      position: relative;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .shine-box::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 1.1rem;
+      padding: 2px;
+      background: radial-gradient(circle, #ff007f, #39ff14, #00ffff, transparent);
+      background-size: 300% 300%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: shine-pulse 8s linear infinite;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-foreground min-h-screen relative overflow-x-hidden selection:bg-red-500 selection:text-white">
+
+  <!-- Interactive Physics Canvas Background -->
+  <canvas id="canvas" class="fixed inset-0 pointer-events-none z-0 w-full h-full"></canvas>
+
+  <!-- Navbar -->
+  <header class="relative z-10 max-w-6xl mx-auto px-6 py-6 flex items-center justify-between border-b border-border/40 backdrop-blur-md">
+    <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+      <span class="bg-red-600 text-white rounded-lg px-2.5 py-1 text-sm font-extrabold shadow-md shadow-red-600/30">SH</span>
+      <span>StudyHub <span class="text-red-500 text-sm font-semibold">2.0</span></span>
+    </div>
+    <nav class="hidden md:flex items-center gap-6 text-sm text-zinc-400">
+      <a href="#materials" class="hover:text-white transition">Notes</a>
+      <a href="#pyqs" class="hover:text-white transition">Question Banks</a>
+      <a href="#syllabus" class="hover:text-white transition">Syllabus</a>
+    </nav>
+    <a href="#get-started" class="text-xs font-semibold px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 transition">
+      Start Practice
+    </a>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="relative z-10 max-w-5xl mx-auto px-6 pt-16 pb-24 text-center flex flex-col items-center">
+    
+    <!-- Announcement Pill -->
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-card/60 backdrop-blur text-xs text-zinc-300 mb-8 shadow-sm">
+      <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="font-medium">Class 10 CBSE 2026–2027 Material Live</span>
+    </div>
+
+    <!-- Main Title Frame with Corner Plus Marks -->
+    <div class="relative w-full max-w-3xl border border-zinc-800/80 bg-zinc-950/60 backdrop-blur-md rounded-2xl py-12 px-6 sm:px-12 my-2 shadow-2xl">
+      <!-- Plus marks on 4 corners -->
+      <span class="absolute -top-3 -left-3 text-red-500 text-xl font-bold select-none">+</span>
+      <span class="absolute -top-3 -right-3 text-red-500 text-xl font-bold select-none">+</span>
+      <span class="absolute -bottom-3 -left-3 text-red-500 text-xl font-bold select-none">+</span>
+      <span class="absolute -bottom-3 -right-3 text-red-500 text-xl font-bold select-none">+</span>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+        Your complete hub for <br />
+        <span class="text-red-500 drop-shadow-sm">Board Prep.</span>
+      </h1>
+
+      <div class="flex items-center justify-center gap-2 mt-4 text-xs font-semibold tracking-wide text-emerald-400">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        100% FREE CHAPTER NOTES & PYQs
+      </div>
+    </div>
+
+    <!-- Typewriter Dynamic Headline -->
+    <h2 class="mt-8 text-xl sm:text-2xl font-medium text-zinc-200">
+      Master concepts for 
+      <span id="typewriter" class="text-cyan-400 font-bold underline decoration-cyan-500/40"></span>
+      <span class="animate-pulse text-cyan-400 font-light">|</span>
+    </h2>
+
+    <p class="mt-4 max-w-xl text-zinc-400 text-sm sm:text-base leading-relaxed">
+      Curated high-yield formulas, NCERT breakdown, and solved previous years' question sets structured to maximize your exam score.
+    </p>
+
+    <!-- Call to Actions -->
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <div class="shine-box p-1">
+        <a href="#materials" class="inline-flex items-center px-6 py-2.5 rounded-xl font-semibold text-sm bg-white text-black hover:bg-zinc-200 transition">
+          Browse Notes &rarr;
+        </a>
+      </div>
+      <a href="#pyqs" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold text-sm border border-zinc-800 bg-zinc-900/80 hover:bg-zinc-800 transition">
+        Question Bank
+      </a>
+    </div>
+
+    <!-- Subject Cards Grid -->
+    <section id="materials" class="mt-20 w-full grid grid-cols-1 sm:grid-cols-3 gap-5 text-left">
+      <div class="p-6 rounded-2xl border border-zinc-800 bg-zinc-950/70 backdrop-blur hover:border-zinc-700 transition">
+        <div class="text-red-500 text-2xl font-bold mb-2">01</div>
+        <h3 class="font-bold text-lg text-white">Mathematics</h3>
+        <p class="text-xs text-zinc-400 mt-1">Real Numbers, Trigonometry proofs, Surface Areas & Statistics cheat sheets.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl border border-zinc-800 bg-zinc-950/70 backdrop-blur hover:border-zinc-700 transition">
+        <div class="text-cyan-400 text-2xl font-bold mb-2">02</div>
+        <h3 class="font-bold text-lg text-white">Science</h3>
+        <p class="text-xs text-zinc-400 mt-1">Light reflection/refraction ray diagrams, Magnetic Effects, and Chemistry reactions.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl border border-zinc-800 bg-zinc-950/70 backdrop-blur hover:border-zinc-700 transition">
+        <div class="text-emerald-400 text-2xl font-bold mb-2">03</div>
+        <h3 class="font-bold text-lg text-white">Question Banks</h3>
+        <p class="text-xs text-zinc-400 mt-1">10-year topic-wise solved CBSE board questions with step-marking schemes.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Canvas & Typewriter Script -->
+  <script>
+    // --- Typewriter Effect ---
+    const topics = [
+      "Class 10 Mathematics",
+      "Science Formula Sheets",
+      "CBSE Past Year Questions",
+      "NCERT Simplified Solutions",
+      "Trigonometry Proofs"
+    ];
+    let topicIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typewriterEl = document.getElementById("typewriter");
+
+    function type() {
+      const current = topics[topicIndex];
+      if (isDeleting) {
+        typewriterEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriterEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let speed = isDeleting ? 40 : 80;
+
+      if (!isDeleting && charIndex === current.length) {
+        speed = 1500;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        topicIndex = (topicIndex + 1) % topics.length;
+        speed = 400;
+      }
+      setTimeout(type, speed);
+    }
+    type();
+
+    // --- Interactive Wave Trail Canvas Engine ---
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let points = [];
+    const trailLength = 40;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    window.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener("touchmove", (e) => {
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    });
+
+    for (let i = 0; i < trailLength; i++) {
+      points.push({ x: mouse.x, y: mouse.y });
+    }
+
+    let hue = 0;
+    function renderWave() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      let head = points[0];
+      head.x += (mouse.x - head.x) * 0.2;
+      head.y += (mouse.y - head.y) * 0.2;
+
+      for (let i = 1; i < points.length; i++) {
+        points[i].x += (points[i - 1].x - points[i].x) * 0.35;
+        points[i].y += (points[i - 1].y - points[i].y) * 0.35;
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length - 1; i++) {
+        const xc = (points[i].x + points[i + 1].x) / 2;
+        const yc = (points[i].y + points[i + 1].y) / 2;
+        ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+      }
+
+      hue = (hue + 0.5) % 360;
+      ctx.strokeStyle = `hsla(${hue}, 85%, 60%, 0.15)`;
+      ctx.lineWidth = 14;
+      ctx.lineCap = "round";
+      ctx.stroke();
+
+      requestAnimationFrame(renderWave);
+    }
+    renderWave();
+  </script>
+</body>
+</html>
