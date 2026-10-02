@@ -20,53 +20,35 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
 }
 
-/* Grid Background Pattern */
 @layer utilities {
-  .bg-grid-white {
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
   .bg-grid-white\/5 {
     background-image: 
       linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
   }
-}
 
-/* Gradient Text Effect */
-@layer utilities {
   .text-gradient {
     @apply bg-gradient-to-r bg-clip-text text-transparent;
   }
 }
 
-/* Glow Effects */
 @layer components {
   .glow-purple {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(168, 85, 247, 0.2);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
   }
 
   .glow-pink {
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.4), 0 0 40px rgba(236, 72, 153, 0.2);
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
   }
 
   .glow-cyan {
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), 0 0 40px rgba(34, 211, 238, 0.2);
-  }
-
-  .glow-button {
-    @apply relative overflow-hidden;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
   }
 }
 
-/* Selection Styling */
 ::selection {
   background-color: #a855f7;
   color: #ffffff;
@@ -77,7 +59,6 @@ body {
   color: #ffffff;
 }
 
-/* Smooth scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
